@@ -1,0 +1,49 @@
+import React from "react";
+import { useState } from "react";
+import useFormContext from "../../hooks/useFormContext";
+
+const FormContext = React.createContext();
+
+const Form = ({ initialState, children, className, onSubmit }) => {
+  const [data, setData] = useState(initialState);
+
+  const handleInputChange = ({ target: { name, value } }) => {
+    setData({ ...data, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(data);
+  };
+
+  const value = { data, handleInputChange, handleSubmit };
+
+  return (
+    <form className={className}>
+      <FormContext.Provider value={value}>{children}</FormContext.Provider>
+    </form>
+  );
+};
+
+export default Form;
+export { FormContext };
+
+const Input = ({ name, label }) => {
+  const { data, handleInputChange } = useFormContext();
+  return (
+    <input
+      onChange={handleInputChange}
+      label={label}
+      name={name}
+      value={data[name]}
+    />
+  );
+};
+
+const SubmitButton = ({ text }) => {
+  const { handleSubmit } = useFormContext();
+  return <button onClick={handleSubmit}>{text}</button>;
+};
+
+Form.Input = Input;
+Form.SubmitButton = SubmitButton;
