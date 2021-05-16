@@ -28,15 +28,32 @@ const Form = ({ initialState, children, className, onSubmit }) => {
 export default Form;
 export { FormContext };
 
-const Input = ({ name, label }) => {
+const Input = ({ name, label, type }) => {
   const { data, handleInputChange } = useFormContext();
   return (
     <input
       onChange={handleInputChange}
       label={label}
       name={name}
+      type={type || null}
       value={data[name]}
     />
+  );
+};
+
+const Select = ({ name, label, options }) => {
+  const { data, handleInputChange } = useFormContext();
+  return (
+    <>
+      <label htmlFor="name">{label}</label>
+      <select value={data[name]} name={name} onChange={handleInputChange}>
+        {options.map((element) => (
+          <option value={element.name} name={element.name} key={element.id}>
+            {element.label}
+          </option>
+        ))}
+      </select>
+    </>
   );
 };
 
@@ -47,3 +64,4 @@ const SubmitButton = ({ text }) => {
 
 Form.Input = Input;
 Form.SubmitButton = SubmitButton;
+Form.Select = Select;

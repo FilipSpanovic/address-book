@@ -35,11 +35,13 @@ const Login = ({ history }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} initialState={LOGIN_FORM_INITIAL_STATE}>
-      <Form.Input name="email" />
-      <Form.Input name="password" />
-      <Form.SubmitButton text="Login" />
-    </Form>
+    <>
+      <Form onSubmit={handleSubmit} initialState={LOGIN_FORM_INITIAL_STATE}>
+        <Form.Input name="email" />
+        <Form.Input name="password" />
+        <Form.SubmitButton text="Login" />
+      </Form>
+    </>
   );
 };
 
