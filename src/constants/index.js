@@ -9,4 +9,5 @@ export const CONTACT_FORM_INITIAL_STATE = {
   dateOfBirth: "",
   contactType: "mobilePhone",
   contact: "",
+  favorite: false,
 };

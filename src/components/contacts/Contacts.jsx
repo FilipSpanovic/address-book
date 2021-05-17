@@ -31,6 +31,12 @@ const Contacts = ({ history }) => {
     });
   };
 
+  const handleFavoriteContact = (contact, contactKey) => (e) => {
+    const contactCopy = { ...contact };
+    contactCopy.favorite = !contactCopy.favorite;
+    ContactsAPI.updateContact(contactKey, contactCopy);
+  };
+
   return (
     <>
       <ContactForm
@@ -53,19 +59,30 @@ const Contacts = ({ history }) => {
           {Object.values(contactsList).map((contact, index) => {
             const contactKey = Object.keys(contactsList)[index];
             return (
-              <tr
-                onClick={redirectToDetailsPage(contact, contactKey)}
-                key={contact.id}
-              >
-                <th>{contact.firstName}</th>
-                <th>{contact.lastName}</th>
-                <th>{contact.dateOfBirth}</th>
-                <th>{contact.contactType}</th>
-                <th>{contact.contact}</th>
+              <tr key={contact.id}>
+                <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                  {contact.firstName}
+                </th>
+                <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                  {contact.lastName}
+                </th>
+                <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                  {contact.dateOfBirth}
+                </th>
+                <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                  {contact.contactType}
+                </th>
+                <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                  {contact.contact}
+                </th>
                 <th>
                   <button onClick={ContactsAPI.deleteContact(contactKey)}>
                     Delete
                   </button>
+                  <button onClick={handleFavoriteContact(contact, contactKey)}>
+                    Favorite
+                  </button>
+                  {contact.favorite ? "true" : "false"}
                 </th>
               </tr>
             );

@@ -25,4 +25,5 @@ export const ContactsAPI = {
   updateContact: async function (key, obj) {
     await db.ref("/contacts").child(key).set(obj);
   },
+
 };
