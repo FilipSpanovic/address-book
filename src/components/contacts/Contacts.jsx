@@ -18,7 +18,7 @@ const contactTypeOptions = [
   { id: 4, name: "pager", label: "Pager" },
 ];
 
-const Contacts = () => {
+const Contacts = ({ history }) => {
   const [contactsList, setContactsList] = useState([]);
 
   useEffect(() => {
@@ -34,6 +34,13 @@ const Contacts = () => {
       return;
     }
     ContactsAPI.createContact(values);
+  };
+
+  const redirectToDetailsPage = (contact, contactKey) => (e) => {
+    history.push({
+      pathname: `/contacts/${contact.id}`,
+      state: { contact, contactKey },
+    });
   };
 
   return (
@@ -67,10 +74,12 @@ const Contacts = () => {
         </thead>
         <tbody>
           {Object.values(contactsList).map((contact, index) => {
-            const contactFirebaseKey = Object.keys(contactsList)[index];
-
+            const contactKey = Object.keys(contactsList)[index];
             return (
-              <tr key={contact.id}>
+              <tr
+                onClick={redirectToDetailsPage(contact, contactKey)}
+                key={contact.id}
+              >
                 <th>{contact.firstName}</th>
                 <th>{contact.lastName}</th>
                 <th>{contact.dateOfBirth}</th>
@@ -78,7 +87,7 @@ const Contacts = () => {
                 <th>{contact.contact}</th>
                 <th>
                   <button
-                    onClick={ContactsAPI.deleteContact(contactFirebaseKey)}
+                    onClick={ContactsAPI.deleteContact(contactKey)}
                   >
                     Delete
                   </button>
