@@ -9,7 +9,13 @@ export const ContactsAPI = {
 
   fetchContacts: async function (cb) {
     await db.ref("/contacts").on("value", function (snapshot) {
-      cb(Object.values(snapshot.val()));
+      cb(snapshot.val());
     });
+  },
+  deleteContact: async function (id) {
+    await db.ref("/contacts").child(id).remove();
+  },
+  updateContact: async function (id, obj) {
+    await db.ref("/contacts").child(id).set(obj);
   },
 };

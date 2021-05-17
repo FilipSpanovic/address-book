@@ -37,21 +37,23 @@ const Contacts = () => {
   };
 
   return (
-    <Form
-      onSubmit={handleContactFormSubmit}
-      initialState={CONTACT_FORM_INITIAL_STATE}
-    >
-      <Form.Input name="firstName" />
-      <Form.Input name="lastName" />
-      <Form.Input name="dateOfBirth" type="date" />
-      <Form.Select
-        label="Select a contact type"
-        options={contactTypeOptions}
-        name="contactType"
-      />
-      <Form.Input name="contact" />
-      <Form.SubmitButton text="Submit" />
-    </Form>
+    <>
+      <Form
+        onSubmit={handleContactFormSubmit}
+        initialState={CONTACT_FORM_INITIAL_STATE}
+      >
+        <Form.Input name="firstName" />
+        <Form.Input name="lastName" />
+        <Form.Input name="dateOfBirth" type="date" />
+        <Form.Select
+          label="Select a contact type"
+          options={contactTypeOptions}
+          name="contactType"
+        />
+        <Form.Input name="contact" />
+        <Form.SubmitButton text="Submit" />
+      </Form>
+    </>
   );
 };
 
