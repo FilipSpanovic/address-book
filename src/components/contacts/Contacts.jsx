@@ -53,6 +53,41 @@ const Contacts = () => {
         <Form.Input name="contact" />
         <Form.SubmitButton text="Submit" />
       </Form>
+
+      <table style={{ border: "1px solid black", marginTop: "20px" }}>
+        <thead>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>DOB</th>
+            <th>Contact type</th>
+            <th>Contact</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.values(contactsList).map((contact, index) => {
+            const contactFirebaseKey = Object.keys(contactsList)[index];
+
+            return (
+              <tr key={contact.id}>
+                <th>{contact.firstName}</th>
+                <th>{contact.lastName}</th>
+                <th>{contact.dateOfBirth}</th>
+                <th>{contact.contactType}</th>
+                <th>{contact.contact}</th>
+                <th>
+                  <button
+                    onClick={ContactsAPI.deleteContact(contactFirebaseKey)}
+                  >
+                    Delete
+                  </button>
+                </th>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </>
   );
 };
