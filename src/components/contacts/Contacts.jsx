@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import Form from "../compound/Form";
-
 import { ContactsAPI } from "./ContactsAPI";
 
 import { CONTACT_FORM_INITIAL_STATE } from "../../constants";
 import { validateContactForm } from "../../helpers/validateContactForm";
-
-const contactTypeOptions = [
-  {
-    id: 1,
-    name: "mobilePhone",
-    label: "Mobile phone",
-  },
-  { id: 2, name: "telephone", label: "Telephone" },
-  { id: 3, name: "email", label: "Email" },
-  { id: 4, name: "pager", label: "Pager" },
-];
+import ContactForm from "./ContactForm";
 
 const Contacts = ({ history }) => {
   const [contactsList, setContactsList] = useState([]);
@@ -45,21 +33,10 @@ const Contacts = ({ history }) => {
 
   return (
     <>
-      <Form
+      <ContactForm
         onSubmit={handleContactFormSubmit}
         initialState={CONTACT_FORM_INITIAL_STATE}
-      >
-        <Form.Input name="firstName" />
-        <Form.Input name="lastName" />
-        <Form.Input name="dateOfBirth" type="date" />
-        <Form.Select
-          label="Select a contact type"
-          options={contactTypeOptions}
-          name="contactType"
-        />
-        <Form.Input name="contact" />
-        <Form.SubmitButton text="Submit" />
-      </Form>
+      />
 
       <table style={{ border: "1px solid black", marginTop: "20px" }}>
         <thead>
@@ -86,9 +63,7 @@ const Contacts = ({ history }) => {
                 <th>{contact.contactType}</th>
                 <th>{contact.contact}</th>
                 <th>
-                  <button
-                    onClick={ContactsAPI.deleteContact(contactKey)}
-                  >
+                  <button onClick={ContactsAPI.deleteContact(contactKey)}>
                     Delete
                   </button>
                 </th>

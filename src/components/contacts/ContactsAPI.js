@@ -8,25 +8,21 @@ export const ContactsAPI = {
   },
 
   fetchContacts: async function (cb) {
-    await db.ref("/contacts").on(
-      "value",
-      function (snapshot) {
-        if (!snapshot.val()) {
-          cb([]);
-          return;
-        }
-        cb(snapshot.val());
-      },
-      (error) => console.log(error)
-    );
+    await db.ref("/contacts").on("value", function (snapshot) {
+      if (!snapshot.val()) {
+        cb([]);
+        return;
+      }
+      cb(snapshot.val());
+    });
   },
-  deleteContact: function (id) {
+  deleteContact: function (key) {
     return async function preventDefault(e) {
       e.preventDefault();
-      await db.ref("/contacts").child(id).remove();
+      await db.ref("/contacts").child(key).remove();
     };
   },
-  updateContact: async function (id, obj) {
-    await db.ref("/contacts").child(id).set(obj);
+  updateContact: async function (key, obj) {
+    await db.ref("/contacts").child(key).set(obj);
   },
 };

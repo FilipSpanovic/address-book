@@ -13,7 +13,7 @@ const Details = ({ location, history }) => {
 
   const redirectToContactUpdatePage = () => {
     history.push({
-      pathname: `/contacts/${contact.id}/update`,
+      pathname: `/contacts/update/${contact.id}`,
       state: { contact, contactKey },
     });
   };
