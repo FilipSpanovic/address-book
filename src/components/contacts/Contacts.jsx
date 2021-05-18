@@ -2,12 +2,21 @@ import React, { useEffect, useState } from "react";
 
 import { ContactsAPI } from "./ContactsAPI";
 
-import { CONTACT_FORM_INITIAL_STATE } from "../../constants";
+import {
+  CONTACT_FORM_INITIAL_STATE,
+  SEARCH_INITIAL_STATE,
+} from "../../constants";
 import { validateContactForm } from "../../helpers/validateContactForm";
 import ContactForm from "./ContactForm";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
+import Table from "./Table";
+import Search from "./Search";
 
 const Contacts = ({ history }) => {
+
   const [contactsList, setContactsList] = useState([]);
+  const [searchTerms, setSearchTerms] = useState(SEARCH_INITIAL_STATE);
+  const { listLimit } = useInfiniteScroll();
 
   useEffect(() => {
     ContactsAPI.fetchContacts(setContactsList);
@@ -37,6 +46,8 @@ const Contacts = ({ history }) => {
     ContactsAPI.updateContact(contactKey, contactCopy);
   };
 
+  const handleSearch = (values) => setSearchTerms(values);
+
   return (
     <div className="contacts-section">
       <div className="row">
@@ -51,57 +62,17 @@ const Contacts = ({ history }) => {
 
         <div className="col-2-of-3">
           <div className="card">
-            <table className="contact-table">
-              <thead>
-                <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>DOB</th>
-                  <th>Contact type</th>
-                  <th>Contact</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.values(contactsList).map((contact, index) => {
-                  const contactKey = Object.keys(contactsList)[index];
-                  return (
-                    <tr key={contact.id}>
-                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                        {contact.firstName}
-                      </th>
-                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                        {contact.lastName}
-                      </th>
-                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                        {contact.dateOfBirth}
-                      </th>
-                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                        {contact.contactType}
-                      </th>
-                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                        {contact.contact}
-                      </th>
-                      <th>
-                        <button
-                          onClick={ContactsAPI.deleteContact(contactKey)}
-                          className="btn btn--red"
-                        >
-                          Delete
-                        </button>
-                        <button
-                          onClick={handleFavoriteContact(contact, contactKey)}
-                          className="btn btn--green"
-                        >
-                          Favorite
-                        </button>
-                        {contact.favorite ? "true" : "false"}
-                      </th>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <Search
+              onSubmit={handleSearch}
+              initialState={SEARCH_INITIAL_STATE}
+            />
+            <Table
+              contactsList={contactsList}
+              listLimit={listLimit}
+              redirectToDetailsPage={redirectToDetailsPage}
+              handleFavoriteContact={handleFavoriteContact}
+              searchTerms={searchTerms}
+            />
           </div>
         </div>
       </div>

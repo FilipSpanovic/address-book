@@ -1,25 +1,29 @@
 import React from "react";
 import Form from "../compound/Form";
 import { contactTypeOptions } from "../../constants/index";
-const Search = () => {
+const Search = ({ initialState, onSubmit }) => {
   return (
     <div className="form">
-      <Form initialState={{}}>
+      <Form onSubmit={onSubmit} initialState={initialState}>
         <div className="row">
           <div className="col-1-of-3">
             <div className="form__group">
-              <Form.Input label="nasda"></Form.Input>
+              <Form.Input name="firstName" label="First name" />
             </div>
           </div>
           <div className="col-1-of-3">
             <div className="form__group">
-              <Form.Input label="nasda"></Form.Input>
+              <Form.Input name="lastName" label="Last name" />
             </div>
           </div>
 
           <div className="col-1-of-3">
             <div className="form__group">
-              <Form.Input label="sadsa"></Form.Input>
+              <Form.Input
+                type="date"
+                name="dateOfBirth"
+                label="Date of birth"
+              />
             </div>
           </div>
         </div>
@@ -27,12 +31,16 @@ const Search = () => {
         <div className="row">
           <div className="col-1-of-3">
             <div className="form__group">
-              <Form.Select options={contactTypeOptions} label="nasda" />
+              <Form.Select
+                name="contactType"
+                options={contactTypeOptions}
+                label="Contact type"
+              />
             </div>
           </div>
           <div className="col-1-of-3">
             <div className="form__group">
-              <Form.Input label="nasda"></Form.Input>
+              <Form.Input name="contact" label="Contact" />
             </div>
           </div>
           <div className="col-1-of-3">
@@ -40,7 +48,7 @@ const Search = () => {
               <Form.SubmitButton
                 text="Search"
                 className="btn btn--green u-margin-top-small"
-              ></Form.SubmitButton>
+              />
             </div>
           </div>
         </div>

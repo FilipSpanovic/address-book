@@ -12,6 +12,14 @@ export const CONTACT_FORM_INITIAL_STATE = {
   favorite: false,
 };
 
+export const SEARCH_INITIAL_STATE = {
+  firstName: "",
+  lastName: "",
+  dateOfBirth: "",
+  contactType: "mobilePhone",
+  contact: "",
+};
+
 export const contactTypeOptions = [
   {
     id: 1,
