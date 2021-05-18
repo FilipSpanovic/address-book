@@ -54,7 +54,7 @@ const Select = ({ name, label, options }) => {
         {label}
       </label>
       <select
-        className="form-imput"
+        className="form__input"
         value={data[name]}
         name={name}
         onChange={handleInputChange}
@@ -71,7 +71,11 @@ const Select = ({ name, label, options }) => {
 
 const SubmitButton = ({ text, className }) => {
   const { handleSubmit } = useFormContext();
-  return <button className={className} onClick={handleSubmit}>{text}</button>;
+  return (
+    <button className={className} onClick={handleSubmit}>
+      {text}
+    </button>
+  );
 };
 
 Form.Input = Input;

@@ -11,3 +11,14 @@ export const CONTACT_FORM_INITIAL_STATE = {
   contact: "",
   favorite: false,
 };
+
+export const contactTypeOptions = [
+  {
+    id: 1,
+    name: "mobilePhone",
+    label: "Mobile phone",
+  },
+  { id: 2, name: "telephone", label: "Telephone" },
+  { id: 3, name: "email", label: "Email" },
+  { id: 4, name: "pager", label: "Pager" },
+];

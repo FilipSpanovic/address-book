@@ -1,0 +1,10 @@
+.contacts-section {
+  min-height: 100vh;
+  overflow-y: scroll !important;
+  padding: 2rem;
+  background: linear-gradient(
+    to right bottom,
+    rgba($color-gray-light-1, 0.8),
+    rgba($color-gray-dark, 0.8)
+  );
+}

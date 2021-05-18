@@ -19,14 +19,44 @@ const Details = ({ location, history }) => {
   };
 
   return (
-    <div>
-      <p>First name: {contact.firstName}</p>
-      <p>Last name: {contact.lastName}</p>
-      <p>Date of birth: {contact.dateOfBirth}</p>
-      <p>Contact type: {contact.contactType}</p>
-      <p>Contact: {contact.contact}</p>
-      <button onClick={ContactsAPI.deleteContact(contactKey)}>Delete</button>
-      <button onClick={redirectToContactUpdatePage}>Update</button>
+    <div className="details-section">
+      <div className="card">
+        <div className="action-btns">
+          <button>Go back</button>
+          <button
+            onClick={ContactsAPI.deleteContact(contactKey)}
+            className="btn--red"
+          >
+            Delete
+          </button>
+        </div>
+
+        <table className="contact-table-details">
+          <tr>
+            <td>First name:</td>
+            <th>{contact.firstName}</th>
+          </tr>
+          <tr>
+            <td>Last name:</td>
+            <th>{contact.lastName}</th>
+          </tr>
+          <tr>
+            <td>Date of birth</td>
+            <th> {contact.dateOfBirth}</th>
+          </tr>
+          <tr>
+            <td>Contact type:</td>
+            <th>{contact.contactType}</th>
+          </tr>
+          <tr>
+            <td>Contact:</td>
+            <th>{contact.contact}</th>
+          </tr>
+        </table>
+        <button className="btn" onClick={redirectToContactUpdatePage}>
+          Update
+        </button>
+      </div>
     </div>
   );
 };

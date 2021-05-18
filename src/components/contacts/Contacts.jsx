@@ -38,63 +38,74 @@ const Contacts = ({ history }) => {
   };
 
   return (
-    <>
-      <ContactForm
-        onSubmit={handleContactFormSubmit}
-        initialState={CONTACT_FORM_INITIAL_STATE}
-      />
+    <div className="contacts-section">
+      <div className="row">
+        <div className="col-1-of-3">
+          <div className="card">
+            <ContactForm
+              onSubmit={handleContactFormSubmit}
+              initialState={CONTACT_FORM_INITIAL_STATE}
+            />
+          </div>
+        </div>
 
-      <table style={{ border: "1px solid black", marginTop: "20px" }}>
-        <thead>
-          <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>DOB</th>
-            <th>Contact type</th>
-            <th>Contact</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.values(contactsList).map((contact, index) => {
-            const contactKey = Object.keys(contactsList)[index];
-            return (
-              <tr key={contact.id}>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.firstName}
-                </th>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.lastName}
-                </th>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.dateOfBirth}
-                </th>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.contactType}
-                </th>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.contact}
-                </th>
-
-                <th>
-                  <button onClick={ContactsAPI.deleteContact(contactKey)}>
-                    Delete
-                  </button>
-                  <button onClick={handleFavoriteContact(contact, contactKey)}>
-                    Favorite
-                  </button>
-                  {contact.favorite ? "true" : "false"}
-                </th>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-
-      <p></p>
-      <p></p>
-      <p></p>
-    </>
+        <div className="col-2-of-3">
+          <div className="card">
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>DOB</th>
+                  <th>Contact type</th>
+                  <th>Contact</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.values(contactsList).map((contact, index) => {
+                  const contactKey = Object.keys(contactsList)[index];
+                  return (
+                    <tr key={contact.id}>
+                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                        {contact.firstName}
+                      </th>
+                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                        {contact.lastName}
+                      </th>
+                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                        {contact.dateOfBirth}
+                      </th>
+                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                        {contact.contactType}
+                      </th>
+                      <th onClick={redirectToDetailsPage(contact, contactKey)}>
+                        {contact.contact}
+                      </th>
+                      <th>
+                        <button
+                          onClick={ContactsAPI.deleteContact(contactKey)}
+                          className="btn btn--red"
+                        >
+                          Delete
+                        </button>
+                        <button
+                          onClick={handleFavoriteContact(contact, contactKey)}
+                          className="btn btn--green"
+                        >
+                          Favorite
+                        </button>
+                        {contact.favorite ? "true" : "false"}
+                      </th>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

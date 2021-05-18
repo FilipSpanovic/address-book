@@ -31,10 +31,14 @@ const Update = ({ location }) => {
   };
 
   return (
-    <ContactForm
-      initialState={INITIAL_STATE_CONTACT_UPDATE}
-      onSubmit={handleContactUpdate}
-    />
+    <div className="update-section">
+      <div className="card card--wide">
+        <ContactForm
+          initialState={INITIAL_STATE_CONTACT_UPDATE}
+          onSubmit={handleContactUpdate}
+        />
+      </div>
+    </div>
   );
 };
 

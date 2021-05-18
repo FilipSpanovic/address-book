@@ -29,4 +29,15 @@
     background-color: $color-primary;
     color: $color-white;
   }
+
+  &--red {
+    background-color: $color-secondary;
+    color: $color-white;
+  }
+}
+
+.action-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }

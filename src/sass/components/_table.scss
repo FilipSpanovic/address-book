@@ -1,0 +1,44 @@
+.contact-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.2rem;
+  overflow-y: scroll;
+
+  td,
+  th {
+    font-weight: 400;
+
+    border: 1px solid $color-gray-light-1;
+    text-align: left;
+    padding: 8px;
+  }
+
+  thead th {
+    font-weight: 700;
+  }
+  tr:nth-child(even) {
+    background-color: $color-gray-light-1;
+  }
+
+  tbody tr:hover {
+    color: $color-gray-dark-3;
+    background-color: $color-primary;
+    cursor: pointer;
+  }
+
+  tbody tr th:last-child {
+    text-align: center;
+  }
+
+  &-details {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.5rem;
+    text-align: left;
+    margin-bottom: 2rem;
+
+    tr td {
+      width: 120px;
+    }
+  }
+}
