@@ -1,0 +1,33 @@
+.form {
+  &__group {
+    margin-bottom: 2rem;
+  }
+  &__input {
+    font-family: inherit;
+    font-size: 1.5rem;
+    padding: 0 1rem;
+    height: 3.6rem;
+    border-radius: 0.2rem;
+    background: $color-white;
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 100%;
+    display: block;
+    color: inherit;
+    transition: all 0.2s ease-out;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba(black, $alpha: 0.1);
+      border-bottom: 0.3rem solid $color-primary;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: block;
+    transition: all 0.3;
+    padding-bottom: 0.5rem;
+  }
+}

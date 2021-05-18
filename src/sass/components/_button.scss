@@ -1,0 +1,32 @@
+.btn {
+  &,
+  &:visited,
+  &:link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    height: 3.6rem;
+    border-radius: 0.4rem;
+    transition: all 0.2 ease-out;
+    position: relative;
+    font-size: $default-font-size;
+    border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    box-shadow: 0 1rem 2rem rgba(black, 0.2);
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(black, 0.2);
+  }
+
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+}

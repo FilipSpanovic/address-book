@@ -7,8 +7,8 @@ export const ContactsAPI = {
     await db.ref("/contacts").push(valueCopy);
   },
 
-  fetchContacts: async function (cb) {
-    await db.ref("/contacts").on("value", function (snapshot) {
+  fetchContacts: function (cb) {
+    db.ref("/contacts").on("value", function (snapshot) {
       if (!snapshot.val()) {
         cb([]);
         return;
@@ -25,5 +25,4 @@ export const ContactsAPI = {
   updateContact: async function (key, obj) {
     await db.ref("/contacts").child(key).set(obj);
   },
-
 };

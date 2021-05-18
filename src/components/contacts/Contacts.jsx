@@ -75,6 +75,7 @@ const Contacts = ({ history }) => {
                 <th onClick={redirectToDetailsPage(contact, contactKey)}>
                   {contact.contact}
                 </th>
+
                 <th>
                   <button onClick={ContactsAPI.deleteContact(contactKey)}>
                     Delete
@@ -89,6 +90,10 @@ const Contacts = ({ history }) => {
           })}
         </tbody>
       </table>
+
+      <p></p>
+      <p></p>
+      <p></p>
     </>
   );
 };

@@ -31,13 +31,18 @@ export { FormContext };
 const Input = ({ name, label, type }) => {
   const { data, handleInputChange } = useFormContext();
   return (
-    <input
-      onChange={handleInputChange}
-      label={label}
-      name={name}
-      type={type || null}
-      value={data[name]}
-    />
+    <>
+      <label htmlFor={name} className="form__label">
+        {label}
+      </label>
+      <input
+        onChange={handleInputChange}
+        name={name}
+        type={type || null}
+        value={data[name]}
+        className={"form__input"}
+      />
+    </>
   );
 };
 
@@ -45,8 +50,15 @@ const Select = ({ name, label, options }) => {
   const { data, handleInputChange } = useFormContext();
   return (
     <>
-      <label htmlFor="name">{label}</label>
-      <select value={data[name]} name={name} onChange={handleInputChange}>
+      <label htmlFor={name} className="form__label">
+        {label}
+      </label>
+      <select
+        className="form-imput"
+        value={data[name]}
+        name={name}
+        onChange={handleInputChange}
+      >
         {options.map((element) => (
           <option value={element.name} name={element.name} key={element.id}>
             {element.label}
@@ -57,9 +69,9 @@ const Select = ({ name, label, options }) => {
   );
 };
 
-const SubmitButton = ({ text }) => {
+const SubmitButton = ({ text, className }) => {
   const { handleSubmit } = useFormContext();
-  return <button onClick={handleSubmit}>{text}</button>;
+  return <button className={className} onClick={handleSubmit}>{text}</button>;
 };
 
 Form.Input = Input;
