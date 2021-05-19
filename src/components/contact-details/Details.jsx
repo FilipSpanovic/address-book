@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { ContactsAPI } from "./ContactsAPI";
+import { ContactsAPI } from "../contacts/ContactsAPI";
 
 const Details = ({ location, history }) => {
   let { id } = useParams();

@@ -20,6 +20,14 @@ export const SEARCH_INITIAL_STATE = {
   contact: "",
 };
 
+export const SEARCH_TERMS_INITIAL_STATE = {
+  firstName: "",
+  lastName: "",
+  dateOfBirth: "",
+  contactType: "",
+  contact: "",
+};
+
 export const contactTypeOptions = [
   {
     id: 1,

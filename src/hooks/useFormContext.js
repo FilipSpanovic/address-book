@@ -2,7 +2,7 @@ import React from "react";
 
 import { FormContext } from "../components/compound/Form";
 
-const useFormContext = () => {
+export const useFormContext = () => {
   const context = React.useContext(FormContext);
 
   if (!context) {
@@ -14,4 +14,3 @@ const useFormContext = () => {
   return context;
 };
 
-export default useFormContext;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import useFormContext from "../../hooks/useFormContext";
+import { useFormContext } from "../../hooks";
 
 const FormContext = React.createContext();
 
@@ -40,13 +40,19 @@ const Input = ({ name, label, type }) => {
         name={name}
         type={type || null}
         value={data[name]}
-        className={"form__input"}
+        className="form__input"
       />
     </>
   );
 };
 
 const Select = ({ name, label, options }) => {
+  const constructOptions = () =>
+    options.map((element) => (
+      <option value={element.name} name={element.name} key={element.id}>
+        {element.label}
+      </option>
+    ));
   const { data, handleInputChange } = useFormContext();
   return (
     <>
@@ -59,11 +65,7 @@ const Select = ({ name, label, options }) => {
         name={name}
         onChange={handleInputChange}
       >
-        {options.map((element) => (
-          <option value={element.name} name={element.name} key={element.id}>
-            {element.label}
-          </option>
-        ))}
+        {constructOptions()}
       </select>
     </>
   );

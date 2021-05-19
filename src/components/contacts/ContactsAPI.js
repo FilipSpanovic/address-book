@@ -1,14 +1,18 @@
-import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
+
+import { db } from "../../firebase";
+
+const contactPath = "/contacts";
+
 export const ContactsAPI = {
   createContact: async function (value) {
     const valueCopy = { ...value };
     valueCopy.id = uuidv4();
-    await db.ref("/contacts").push(valueCopy);
+    await db.ref(contactPath).push(valueCopy);
   },
 
-  fetchContacts: function (cb) {
-    db.ref("/contacts").on("value", function (snapshot) {
+  fetchContacts: async function (cb) {
+    await db.ref(contactPath).on("value", function (snapshot) {
       if (!snapshot.val()) {
         cb([]);
         return;
@@ -19,10 +23,10 @@ export const ContactsAPI = {
   deleteContact: function (key) {
     return async function preventDefault(e) {
       e.preventDefault();
-      await db.ref("/contacts").child(key).remove();
+      await db.ref(contactPath).child(key).remove();
     };
   },
   updateContact: async function (key, obj) {
-    await db.ref("/contacts").child(key).set(obj);
+    await db.ref(contactPath).child(key).set(obj);
   },
 };

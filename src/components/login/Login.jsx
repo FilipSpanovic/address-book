@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
-import { validateLogin } from "../../helpers/validateLogin";
+import { useDispatch, useSelector } from "react-redux";
+
 import Form from "../compound/Form";
 
 import { LOGIN_FORM_INITIAL_STATE } from "../../constants";
+
+import { validateLoginForm } from "../../helpers/validateLoginForm";
+import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
+
 import {
   signInWithEmailAndPassword,
   selectStatus,
 } from "../../store/slices/loginSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -24,14 +28,10 @@ const Login = ({ history }) => {
   }, [status]);
 
   const handleSubmit = (values) => {
-    const errors = validateLogin(values);
-
-    if (Object.keys(errors).length > 0) {
-      Object.keys(errors).map((element) => alert(errors[element]));
-      return;
+    const isFormValid = validateFormOnSubmit(values, validateLoginForm);
+    if (!isFormValid) {
+      dispatch(signInWithEmailAndPassword(values));
     }
-
-    dispatch(signInWithEmailAndPassword(values));
   };
 
   return (

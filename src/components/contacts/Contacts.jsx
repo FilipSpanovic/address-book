@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-import { ContactsAPI } from "./ContactsAPI";
-
 import {
   CONTACT_FORM_INITIAL_STATE,
   SEARCH_INITIAL_STATE,
+  SEARCH_TERMS_INITIAL_STATE,
 } from "../../constants";
 import { validateContactForm } from "../../helpers/validateContactForm";
-import ContactForm from "./ContactForm";
-import useInfiniteScroll from "../../hooks/useInfiniteScroll";
+import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
+
+import { useInfiniteScroll } from "../../hooks";
+
+import ContactForm from "../common/ContactForm";
 import Table from "./Table";
 import Search from "./Search";
+import { ContactsAPI } from "./ContactsAPI";
 
 const Contacts = ({ history }) => {
-
   const [contactsList, setContactsList] = useState([]);
-  const [searchTerms, setSearchTerms] = useState(SEARCH_INITIAL_STATE);
+  const [searchTerms, setSearchTerms] = useState(SEARCH_TERMS_INITIAL_STATE);
   const { listLimit } = useInfiniteScroll();
 
   useEffect(() => {
@@ -23,14 +25,10 @@ const Contacts = ({ history }) => {
   }, []);
 
   const handleContactFormSubmit = (values) => {
-    const contactFormErrors = validateContactForm(values);
-    if (Object.keys(contactFormErrors).length > 0) {
-      Object.keys(contactFormErrors).map((element) =>
-        alert(contactFormErrors[element])
-      );
-      return;
+    const isFormValid = validateFormOnSubmit(values, validateContactForm);
+    if (!isFormValid) {
+      ContactsAPI.createContact(values);
     }
-    ContactsAPI.createContact(values);
   };
 
   const redirectToDetailsPage = (contact, contactKey) => (e) => {
@@ -41,6 +39,7 @@ const Contacts = ({ history }) => {
   };
 
   const handleFavoriteContact = (contact, contactKey) => (e) => {
+    console.log(contact, "kontakt");
     const contactCopy = { ...contact };
     contactCopy.favorite = !contactCopy.favorite;
     ContactsAPI.updateContact(contactKey, contactCopy);

@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Login from "./components/login/Login";
 import Contacts from "./components/contacts/Contacts";
-import Details from "./components/contacts/Details";
-import Update from "./components/contacts/Update";
+import Details from "./components/contact-details/Details";
+import Update from "./components/contact-update/Update";
 
 function App() {
   return (

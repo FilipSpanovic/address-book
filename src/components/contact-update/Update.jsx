@@ -1,9 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import ContactForm from "./ContactForm";
 
+import ContactForm from "../common/ContactForm";
+import { ContactsAPI } from "../contacts/ContactsAPI";
+import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
 import { validateContactForm } from "../../helpers/validateContactForm";
-import { ContactsAPI } from "./ContactsAPI";
 
 const Update = ({ location }) => {
   let { id } = useParams();
@@ -14,27 +15,19 @@ const Update = ({ location }) => {
 
   const { contact } = location.state;
 
-  const INITIAL_STATE_CONTACT_UPDATE = {
-    ...contact,
-  };
-
   const handleContactUpdate = (values) => {
     const { contactKey } = location.state;
-    const contactFormErrors = validateContactForm(values);
-    if (Object.keys(contactFormErrors).length > 0) {
-      Object.keys(contactFormErrors).map((element) =>
-        alert(contactFormErrors[element])
-      );
-      return;
+    const isFormValid = validateFormOnSubmit(values, validateContactForm);
+    if (!isFormValid) {
+      ContactsAPI.updateContact(contactKey, values);
     }
-    ContactsAPI.updateContact(contactKey, values);
   };
 
   return (
     <div className="update-section">
       <div className="card card--wide">
         <ContactForm
-          initialState={INITIAL_STATE_CONTACT_UPDATE}
+          initialState={{ ...contact }}
           onSubmit={handleContactUpdate}
         />
       </div>

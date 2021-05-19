@@ -1,6 +1,9 @@
 import React from "react";
+
 import Form from "../compound/Form";
+
 import { contactTypeOptions } from "../../constants/index";
+
 const Search = ({ initialState, onSubmit }) => {
   return (
     <div className="form">

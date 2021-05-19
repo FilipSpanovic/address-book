@@ -1,6 +1,6 @@
 import { validatePassword, validateEmail } from "./";
 
-export const validateLogin = ({ email, password }) => {
+export const validateLoginForm = ({ email, password }) => {
   let errors = {};
 
   if (!email) {
@@ -8,7 +8,7 @@ export const validateLogin = ({ email, password }) => {
     return errors;
   }
   if (!password) {
-    errors.email = "Please enter your password";
+    errors.password = "Please enter your password";
     return errors;
   }
 

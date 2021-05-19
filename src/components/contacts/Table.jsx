@@ -8,15 +8,71 @@ const Table = ({
   handleFavoriteContact,
   searchTerms,
 }) => {
-  const filteredContacts = Object.values(contactsList).filter((element) => {
+  const filteredContacts = Object.values(contactsList).filter(
+    ({ firstName, lastName, dateOfBirth, contactType, contact }) => {
+      return (
+        firstName
+          .toLowerCase()
+          .startsWith(searchTerms["firstName"].toLowerCase()) &&
+        lastName
+          .toLowerCase()
+          .startsWith(searchTerms["lastName"].toLowerCase()) &&
+        dateOfBirth
+          .toLowerCase()
+          .startsWith(searchTerms["dateOfBirth"].toLowerCase()) &&
+        contactType
+          .toLowerCase()
+          .startsWith(searchTerms["contactType"].toLowerCase()) &&
+        contact.toLowerCase().startsWith(searchTerms["contact"].toLowerCase())
+      );
+    }
+  );
+
+  const constructTableBody = () => {
+    return filteredContacts.map((contact, index) => {
+      const contactKey = Object.keys(contactsList)[index];
+      const { id } = contact;
+      if (index < listLimit) {
+        return <tr key={id}>{constructTableCells(contact, contactKey)}</tr>;
+      }
+    });
+  };
+
+  const constructTableCells = (contactInfo, contactKey) => {
+    const { firstName, lastName, dateOfBirth, contactType, contact, favorite } =
+      contactInfo;
+
     return (
-      element.firstName.startsWith(searchTerms["firstName"]) &&
-      element.lastName.startsWith(searchTerms["lastName"]) &&
-      element.dateOfBirth.startsWith(searchTerms["dateOfBirth"]) &&
-      element.contactType.startsWith(searchTerms["contactType"]) &&
-      element.contactType.startsWith(searchTerms["contactType"])
+      <>
+        <td onClick={redirectToDetailsPage(contact, contactKey)}>
+          {firstName}
+        </td>
+        <td onClick={redirectToDetailsPage(contact, contactKey)}>{lastName}</td>
+        <td onClick={redirectToDetailsPage(contact, contactKey)}>
+          {dateOfBirth}
+        </td>
+        <td onClick={redirectToDetailsPage(contact, contactKey)}>
+          {contactType}
+        </td>
+        <td onClick={redirectToDetailsPage(contact, contactKey)}>{contact}</td>
+        <td>
+          <button
+            onClick={ContactsAPI.deleteContact(contactKey)}
+            className="btn btn--red"
+          >
+            Delete
+          </button>
+          <button
+            onClick={handleFavoriteContact(contactInfo, contactKey)}
+            className="btn btn--green"
+          >
+            Favorite
+          </button>
+          {favorite ? "true" : "false"}
+        </td>
+      </>
     );
-  });
+  };
 
   return (
     <table className="contact-table">
@@ -30,47 +86,7 @@ const Table = ({
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
-        {filteredContacts.map((contact, index) => {
-          const contactKey = Object.keys(contactsList)[index];
-          if (index < listLimit) {
-            return (
-              <tr key={contact.id}>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.firstName}
-                </th>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.lastName}
-                </th>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.dateOfBirth}
-                </th>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.contactType}
-                </th>
-                <th onClick={redirectToDetailsPage(contact, contactKey)}>
-                  {contact.contact}
-                </th>
-                <th>
-                  <button
-                    onClick={ContactsAPI.deleteContact(contactKey)}
-                    className="btn btn--red"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    onClick={handleFavoriteContact(contact, contactKey)}
-                    className="btn btn--green"
-                  >
-                    Favorite
-                  </button>
-                  {contact.favorite ? "true" : "false"}
-                </th>
-              </tr>
-            );
-          }
-        })}
-      </tbody>
+      <tbody>{constructTableBody()}</tbody>
     </table>
   );
 };

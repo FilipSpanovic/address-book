@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const useInfiniteScroll = () => {
+export const useInfiniteScroll = () => {
   const [listLimit, setListLimit] = useState(10);
 
   useEffect(() => {
@@ -22,4 +22,3 @@ const useInfiniteScroll = () => {
   };
 };
 
-export default useInfiniteScroll;
