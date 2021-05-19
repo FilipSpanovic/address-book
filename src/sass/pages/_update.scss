@@ -1,5 +1,6 @@
 .update-section {
   min-height: 100vh;
   overflow: hidden;
+  @include setBackground;
   @include flexCenter;
 }

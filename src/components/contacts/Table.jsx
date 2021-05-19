@@ -44,17 +44,21 @@ const Table = ({
 
     return (
       <>
-        <td onClick={redirectToDetailsPage(contact, contactKey)}>
+        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
           {firstName}
         </td>
-        <td onClick={redirectToDetailsPage(contact, contactKey)}>{lastName}</td>
-        <td onClick={redirectToDetailsPage(contact, contactKey)}>
+        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
+          {lastName}
+        </td>
+        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
           {dateOfBirth}
         </td>
-        <td onClick={redirectToDetailsPage(contact, contactKey)}>
+        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
           {contactType}
         </td>
-        <td onClick={redirectToDetailsPage(contact, contactKey)}>{contact}</td>
+        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
+          {contact}
+        </td>
         <td>
           <button
             onClick={ContactsAPI.deleteContact(contactKey)}

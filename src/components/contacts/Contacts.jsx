@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { toast } from "react-toastify";
 import {
   CONTACT_FORM_INITIAL_STATE,
   SEARCH_INITIAL_STATE,
@@ -27,19 +27,22 @@ const Contacts = ({ history }) => {
   const handleContactFormSubmit = (values) => {
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
     if (!isFormValid) {
-      ContactsAPI.createContact(values);
+      ContactsAPI.createContact(values, showNotification);
     }
   };
 
-  const redirectToDetailsPage = (contact, contactKey) => (e) => {
+  const showNotification = () => {
+    toast.success("Contact created");
+  };
+
+  const redirectToDetailsPage = (contactInfo, contactKey) => (e) => {
     history.push({
-      pathname: `/contacts/${contact.id}`,
-      state: { contact, contactKey },
+      pathname: `/contacts/${contactInfo.id}`,
+      state: { contactInfo, contactKey },
     });
   };
 
   const handleFavoriteContact = (contact, contactKey) => (e) => {
-    console.log(contact, "kontakt");
     const contactCopy = { ...contact };
     contactCopy.favorite = !contactCopy.favorite;
     ContactsAPI.updateContact(contactKey, contactCopy);

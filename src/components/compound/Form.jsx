@@ -16,6 +16,7 @@ const Form = ({ initialState, children, className, onSubmit }) => {
     onSubmit(data);
   };
 
+
   const value = { data, handleInputChange, handleSubmit };
 
   return (
@@ -48,9 +49,9 @@ const Input = ({ name, label, type }) => {
 
 const Select = ({ name, label, options }) => {
   const constructOptions = () =>
-    options.map((element) => (
-      <option value={element.name} name={element.name} key={element.id}>
-        {element.label}
+    options.map(({ name, id, label }) => (
+      <option value={name} name={name} key={id}>
+        {label}
       </option>
     ));
   const { data, handleInputChange } = useFormContext();

@@ -5,10 +5,11 @@ import { db } from "../../firebase";
 const contactPath = "/contacts";
 
 export const ContactsAPI = {
-  createContact: async function (value) {
+  createContact: async function (value, cb) {
     const valueCopy = { ...value };
     valueCopy.id = uuidv4();
     await db.ref(contactPath).push(valueCopy);
+    cb();
   },
 
   fetchContacts: async function (cb) {
@@ -20,13 +21,15 @@ export const ContactsAPI = {
       cb(snapshot.val());
     });
   },
-  deleteContact: function (key) {
+  deleteContact: function (key, cb) {
     return async function preventDefault(e) {
       e.preventDefault();
       await db.ref(contactPath).child(key).remove();
+      cb();
     };
   },
-  updateContact: async function (key, obj) {
+  updateContact: async function (key, obj, cb) {
     await db.ref(contactPath).child(key).set(obj);
+    cb();
   },
 };

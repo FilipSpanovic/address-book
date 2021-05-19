@@ -4,6 +4,14 @@
   align-items: center;
 }
 
+@mixin setBackground {
+  background: linear-gradient(
+    to right bottom,
+    rgba($color-gray-light-1, 0.8),
+    rgba($color-gray-dark, 0.8)
+  );
+}
+
 @mixin respond($breakpoint) {
   @if $breakpoint == phone {
     @media only screen and (max-width: 37.5em) {

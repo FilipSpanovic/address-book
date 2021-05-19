@@ -5,7 +5,7 @@ import { contactTypeOptions } from "../../constants";
 
 const ContactForm = ({ onSubmit, initialState }) => {
   return (
-    <Form onSubmit={onSubmit} initialState={initialState}>
+    <Form onSubmit={onSubmit}  initialState={initialState}>
       <div className="form_group">
         <Form.Input label="First name" name="firstName" />
       </div>
@@ -22,11 +22,11 @@ const ContactForm = ({ onSubmit, initialState }) => {
           name="contactType"
         />
       </div>
-      <div className="form_group">
+      <div className="form_group  u-margin-bottom-small">
         <Form.Input label="Contact" name="contact" />
       </div>
       <div className="form_group">
-        <Form.SubmitButton className="btn btn--green u" text="Submit" />
+        <Form.SubmitButton className="btn btn--green" text="Submit" />
       </div>
     </Form>
   );
