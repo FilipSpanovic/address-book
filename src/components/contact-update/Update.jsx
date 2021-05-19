@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 
 import ContactForm from "../common/ContactForm";
 import { ContactsAPI } from "../contacts/ContactsAPI";
-import { showNotification } from "../../helpers/showNotification";
+import { showNotificationAndRedirect } from "../../helpers/showNotificationAndRedirect";
 import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
 import { validateContactForm } from "../../helpers/validateContactForm";
 
 const Update = ({ location, history }) => {
   let { id } = useParams();
 
-  const { contactInfo } = location.state;
+  const { contactInfo, contactKey } = location.state;
 
   if (location.state === undefined || id !== contactInfo.id) {
     return <p>page not found!</p>;
@@ -20,6 +20,13 @@ const Update = ({ location, history }) => {
     history.push("/contacts");
   };
 
+  const redirectToDetailsPage = () => {
+    history.push({
+      pathname: `/contacts/${id}`,
+      state: { contactInfo, contactKey },
+    });
+  };
+
   const handleContactUpdate = (values) => {
     const { contactKey } = location.state;
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
@@ -27,7 +34,7 @@ const Update = ({ location, history }) => {
       ContactsAPI.updateContact(
         contactKey,
         values,
-        showNotification("Contact updated!", redirectToContactsPage)
+        showNotificationAndRedirect("Contact updated!", redirectToContactsPage)
       );
     }
   };
@@ -35,6 +42,9 @@ const Update = ({ location, history }) => {
   return (
     <div className="update-section">
       <div className="card card--wide">
+        <button onClick={redirectToDetailsPage} className="btn">
+          Details
+        </button>
         <ContactForm
           initialState={{ ...contactInfo }}
           onSubmit={handleContactUpdate}

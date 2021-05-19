@@ -8,7 +8,7 @@ import {
 import { validateContactForm } from "../../helpers/validateContactForm";
 import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
 
-import { useInfiniteScroll } from "../../hooks";
+import { useInfiniteScroll, useTableSort } from "../../hooks";
 
 import ContactForm from "../common/ContactForm";
 import Table from "./Table";
@@ -19,6 +19,7 @@ const Contacts = ({ history }) => {
   const [contactsList, setContactsList] = useState([]);
   const [searchTerms, setSearchTerms] = useState(SEARCH_TERMS_INITIAL_STATE);
   const { listLimit } = useInfiniteScroll();
+  const { sortData, handleSort } = useTableSort(contactsList);
 
   useEffect(() => {
     ContactsAPI.fetchContacts(setContactsList);
@@ -27,11 +28,11 @@ const Contacts = ({ history }) => {
   const handleContactFormSubmit = (values) => {
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
     if (!isFormValid) {
-      ContactsAPI.createContact(values, showNotification);
+      ContactsAPI.createContact(values, showNotificationAndRedirect);
     }
   };
 
-  const showNotification = () => {
+  const showNotificationAndRedirect = () => {
     toast.success("Contact created");
   };
 
@@ -50,6 +51,7 @@ const Contacts = ({ history }) => {
 
   const handleSearch = (values) => setSearchTerms(values);
 
+  
   return (
     <div className="contacts-section">
       <div className="row">
@@ -74,6 +76,8 @@ const Contacts = ({ history }) => {
               redirectToDetailsPage={redirectToDetailsPage}
               handleFavoriteContact={handleFavoriteContact}
               searchTerms={searchTerms}
+              handleSort={handleSort}
+              sortData={sortData}
             />
           </div>
         </div>

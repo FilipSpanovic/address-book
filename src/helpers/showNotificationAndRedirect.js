@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export const showNotification = (msg, redirect) => (e) => {
+export const showNotificationAndRedirect = (msg, redirect) => (e) => {
   toast.success(msg);
   redirect();
 };

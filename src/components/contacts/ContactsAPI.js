@@ -21,10 +21,14 @@ export const ContactsAPI = {
       cb(snapshot.val());
     });
   },
+
   deleteContact: function (key, cb) {
     return async function preventDefault(e) {
       e.preventDefault();
       await db.ref(contactPath).child(key).remove();
+      if (typeof cb === "function") {
+        cb();
+      }
     };
   },
   updateContact: async function (key, obj, cb) {

@@ -29,6 +29,10 @@
   tbody tr th:last-child {
     text-align: center;
   }
+  thead th.asc::after {
+    font-family: FontAwesome;
+    content: "\fo95";
+  }
 
   &-details {
     width: 100%;

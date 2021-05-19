@@ -1,6 +1,13 @@
 import React from "react";
 
-const Table = ({ firstName, lastName, dateOfBirth, contactType, contact }) => {
+const Table = ({
+  firstName,
+  lastName,
+  dateOfBirth,
+  contactType,
+  contact,
+  favorite,
+}) => {
   return (
     <table className="contact-table-details">
       <tbody>
@@ -24,6 +31,7 @@ const Table = ({ firstName, lastName, dateOfBirth, contactType, contact }) => {
           <td>Contact:</td>
           <th>{contact}</th>
         </tr>
+        {favorite && <p>favorit</p>}
       </tbody>
     </table>
   );

@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import {
   faStar as farFaStar,
+  faArrowAltCircleDown,
+  faArrowAltCircleUp,
 } from "@fortawesome/free-regular-svg-icons";
 
 const Table = ({
@@ -12,9 +14,13 @@ const Table = ({
   redirectToDetailsPage,
   handleFavoriteContact,
   searchTerms,
+  handleSort,
+  sortData,
 }) => {
-  const filteredContacts = Object.values(contactsList).filter(
-    ({ firstName, lastName, dateOfBirth, contactType, contact }) => {
+  const listCopy = { ...contactsList };
+
+  const filteredContacts = Object.values(listCopy)
+    .filter(({ firstName, lastName, dateOfBirth, contactType, contact }) => {
       return (
         firstName
           .toLowerCase()
@@ -30,8 +36,16 @@ const Table = ({
           .startsWith(searchTerms["contactType"].toLowerCase()) &&
         contact.toLowerCase().startsWith(searchTerms["contact"].toLowerCase())
       );
-    }
-  );
+    })
+    .sort((a, b) => {
+      if (a[sortData.key] < b[sortData.key]) {
+        return sortData.direction === "asc" ? -1 : 1;
+      }
+      if (a[sortData.key] > b[sortData.key]) {
+        return sortData.direction === "asc" ? 1 : -1;
+      }
+      return 0;
+    });
 
   const constructTableBody = () => {
     return filteredContacts.map((contact, index) => {
@@ -90,11 +104,53 @@ const Table = ({
     <table className="contact-table">
       <thead>
         <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>DOB</th>
-          <th>Contact type</th>
-          <th>Contact</th>
+          <th id="firstName" onClick={handleSort}>
+            Firstname
+            {sortData.key === "firstName" && sortData.direction === "asc" && (
+              <FontAwesomeIcon icon={faArrowAltCircleDown} />
+            )}
+            {sortData.key === "firstName" && sortData.direction === "desc" && (
+              <FontAwesomeIcon icon={faArrowAltCircleUp} />
+            )}
+          </th>
+          <th id="lastName" onClick={handleSort}>
+            Lastname
+            {sortData.key === "lastName" && sortData.direction === "asc" && (
+              <FontAwesomeIcon icon={faArrowAltCircleDown} />
+            )}
+            {sortData.key === "lastName" && sortData.direction === "desc" && (
+              <FontAwesomeIcon icon={faArrowAltCircleUp} />
+            )}
+          </th>
+          <th id="dateOfBirth" onClick={handleSort}>
+            DOB
+            {sortData.key === "dateOfBirth" && sortData.direction === "asc" && (
+              <FontAwesomeIcon icon={faArrowAltCircleDown} />
+            )}
+            {sortData.key === "dateOfBirth" &&
+              sortData.direction === "desc" && (
+                <FontAwesomeIcon icon={faArrowAltCircleUp} />
+              )}
+          </th>
+          <th id="contactType" onClick={handleSort}>
+            Contact type
+            {sortData.key === "contactType" && sortData.direction === "asc" && (
+              <FontAwesomeIcon icon={faArrowAltCircleDown} />
+            )}
+            {sortData.key === "contactType" &&
+              sortData.direction === "desc" && (
+                <FontAwesomeIcon icon={faArrowAltCircleUp} />
+              )}
+          </th>
+          <th id="contact" onClick={handleSort}>
+            Contact
+            {sortData.key === "contact" && sortData.direction === "asc" && (
+              <FontAwesomeIcon icon={faArrowAltCircleDown} />
+            )}
+            {sortData.key === "contact" && sortData.direction === "desc" && (
+              <FontAwesomeIcon icon={faArrowAltCircleUp} />
+            )}
+          </th>
           <th>Actions</th>
         </tr>
       </thead>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { showNotification } from "../../helpers/showNotification";
+import { showNotificationAndRedirect } from "../../helpers/showNotificationAndRedirect";
 import { ContactsAPI } from "../contacts/ContactsAPI";
 import Table from "./Table";
 
@@ -17,7 +17,6 @@ const Details = ({ location, history }) => {
   }
 
   const redirectToContactUpdatePage = () => {
-    console.log(contactInfo, "info");
     history.push({
       pathname: `/contacts/update/${contactInfo.id}`,
       state: { contactInfo, contactKey },
@@ -32,13 +31,15 @@ const Details = ({ location, history }) => {
     <div className="details-section">
       <div className="card">
         <div className="action-btns">
-          <button onClick={redirectToDetailsPage}>Go back</button>
           <button
             onClick={ContactsAPI.deleteContact(
               contactKey,
-              showNotification("Contact deleted", redirectToDetailsPage)
+              showNotificationAndRedirect(
+                "Contact deleted",
+                redirectToDetailsPage
+              )
             )}
-            className="btn--red"
+            className="btn btn--red"
           >
             Delete
           </button>
