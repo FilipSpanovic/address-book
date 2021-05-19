@@ -3,9 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import "./sass/main.scss"
-import 'react-toastify/dist/ReactToastify.css';
-
+import "./sass/main.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Provider } from "react-redux";
 import store from "./store";

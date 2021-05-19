@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import Form from "../compound/Form";
 
@@ -23,7 +24,9 @@ const Login = ({ history }) => {
     }
 
     if (status === "rejected") {
-      alert("The email address or password is incorrect. Please try again");
+      toast.error(
+        "The email address or password is incorrect. Please try again"
+      );
     }
   }, [status]);
 

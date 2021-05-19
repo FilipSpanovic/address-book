@@ -1,5 +1,10 @@
 import React from "react";
 import { ContactsAPI } from "./ContactsAPI";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStar as farFaStar,
+} from "@fortawesome/free-regular-svg-icons";
 
 const Table = ({
   contactsList,
@@ -60,19 +65,22 @@ const Table = ({
           {contact}
         </td>
         <td>
-          <button
+          <FontAwesomeIcon
             onClick={ContactsAPI.deleteContact(contactKey)}
-            className="btn btn--red"
-          >
-            Delete
-          </button>
-          <button
-            onClick={handleFavoriteContact(contactInfo, contactKey)}
-            className="btn btn--green"
-          >
-            Favorite
-          </button>
-          {favorite ? "true" : "false"}
+            icon={faTrashAlt}
+          />
+
+          {favorite ? (
+            <FontAwesomeIcon
+              onClick={handleFavoriteContact(contactInfo, contactKey)}
+              icon={faStar}
+            />
+          ) : (
+            <FontAwesomeIcon
+              onClick={handleFavoriteContact(contactInfo, contactKey)}
+              icon={farFaStar}
+            />
+          )}
         </td>
       </>
     );

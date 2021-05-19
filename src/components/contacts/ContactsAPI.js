@@ -25,11 +25,12 @@ export const ContactsAPI = {
     return async function preventDefault(e) {
       e.preventDefault();
       await db.ref(contactPath).child(key).remove();
-      cb();
     };
   },
   updateContact: async function (key, obj, cb) {
     await db.ref(contactPath).child(key).set(obj);
-    cb();
+    if (typeof cb === "function") {
+      cb();
+    }
   },
 };
