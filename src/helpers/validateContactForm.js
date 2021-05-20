@@ -43,7 +43,7 @@ export const validateContactForm = ({
     return errors;
   }
 
-  if (contactType === "email" && contact) {
+  if (contactType === "email") {
     const isEmailValid = validateEmail(contact);
     if (!isEmailValid) {
       errors.contact = "Please enter your email address in a valid format";

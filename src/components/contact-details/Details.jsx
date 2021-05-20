@@ -6,20 +6,21 @@ import Table from "./Table";
 
 const Details = ({ location, history }) => {
   let { id } = useParams();
+  console.log(location.state);
 
   if (location.state === undefined || id !== location.state.contactInfo.id) {
     return <p>page not found!</p>;
   }
 
   const { state } = location;
-  const { contactInfo, contactKey } = state;
-  const { firstName, lastName, dateOfBirth, contactType, contact } =
+  const { contactInfo } = state;
+  const { firstName, lastName, dateOfBirth, contactType, contact, key } =
     contactInfo;
 
   const redirectToContactUpdatePage = () => {
     history.push({
       pathname: `/contacts/update/${contactInfo.id}`,
-      state: { contactInfo, contactKey },
+      state: { contactInfo },
     });
   };
 
@@ -33,7 +34,7 @@ const Details = ({ location, history }) => {
         <div className="action-btns">
           <button
             onClick={ContactsAPI.deleteContact(
-              contactKey,
+              key,
               showNotificationAndRedirect(
                 "Contact deleted",
                 redirectToDetailsPage

@@ -8,12 +8,12 @@ const Favorites = () => {
     ContactsAPI.fetchContacts(setFavoriteContactsList);
   }, []);
 
-  const filterFavoriteContacts = Object.values(favoriteContactsList).filter(
+  const filterFavoriteContacts = favoriteContactsList.filter(
     (element) => element.favorite
   );
 
   const constructList = () => {
-    return Object.values(favoriteContactsList).map(
+    return favoriteContactsList.map(
       ({
         firstName,
         lastName,

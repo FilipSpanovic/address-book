@@ -29,7 +29,7 @@ const Contacts = ({ history }) => {
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
     if (!isFormValid) {
       ContactsAPI.createContact(values, showNotificationAndRedirect);
-      // setData(CONTACT_FORM_INITIAL_STATE);
+      setData(CONTACT_FORM_INITIAL_STATE);
     }
   };
 
@@ -37,17 +37,17 @@ const Contacts = ({ history }) => {
     toast.success("Contact created");
   };
 
-  const redirectToDetailsPage = (contactInfo, contactKey) => (e) => {
+  const redirectToDetailsPage = (contactInfo) => (e) => {
     history.push({
       pathname: `/contacts/${contactInfo.id}`,
-      state: { contactInfo, contactKey },
+      state: { contactInfo },
     });
   };
 
-  const handleFavoriteContact = (contact, contactKey) => (e) => {
+  const handleFavoriteContact = (contact) => (e) => {
     const contactCopy = { ...contact };
     contactCopy.favorite = !contactCopy.favorite;
-    ContactsAPI.updateContact(contactKey, contactCopy);
+    ContactsAPI.updateContact(contact.key, contactCopy);
   };
 
   const handleSearch = (values) => setSearchTerms(values);

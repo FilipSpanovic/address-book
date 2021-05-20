@@ -13,7 +13,7 @@ const Form = ({ initialState, children, className, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(data);
+    onSubmit(data, setData);
   };
 
   const value = { data, handleInputChange, handleSubmit };

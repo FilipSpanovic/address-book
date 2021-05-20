@@ -10,20 +10,18 @@ import { validateContactForm } from "../../helpers/validateContactForm";
 const Update = ({ location, history }) => {
   let { id } = useParams();
 
-  if (
-    location.state === undefined ||
-    location.contactInfo === undefined ||
-    id !== location.statecontactInfo.id
-  ) {
+  console.log(location);
+
+  if (location.state === undefined || id !== location.state.contactInfo.id) {
     return <p>page not found!</p>;
   }
 
-  const { contactInfo, contactKey } = location.state;
+  const { contactInfo } = location.state;
 
   const redirectToDetailsPage = () => {
     history.push({
       pathname: `/contacts/${id}`,
-      state: { contactInfo, contactKey },
+      state: { contactInfo },
     });
   };
 
@@ -32,11 +30,13 @@ const Update = ({ location, history }) => {
   };
 
   const handleContactUpdate = (values) => {
-    const { contactKey } = location.state;
+    const {
+      contactInfo: { key },
+    } = location.state;
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
     if (!isFormValid) {
       ContactsAPI.updateContact(
-        contactKey,
+        key,
         values,
         showNotificationAndRedirect("Contact updated!", redirectToContactsPage)
       );

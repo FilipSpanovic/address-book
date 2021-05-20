@@ -50,49 +50,45 @@ const Table = ({
 
   const constructTableBody = () => {
     return filterContacts.map((contact, index) => {
-      const contactKey = Object.keys(contactsList)[index];
       const { id } = contact;
       if (index < listLimit) {
-        return <tr key={id}>{constructTableCells(contact, contactKey)}</tr>;
+        return <tr key={id}>{constructTableCells(contact)}</tr>;
       }
     });
   };
 
-  const constructTableCells = (contactInfo, contactKey) => {
-    const { firstName, lastName, dateOfBirth, contactType, contact, favorite } =
-      contactInfo;
+  const constructTableCells = (contactInfo) => {
+    const {
+      firstName,
+      lastName,
+      dateOfBirth,
+      contactType,
+      contact,
+      favorite,
+      key,
+    } = contactInfo;
 
     return (
       <>
-        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
-          {firstName}
-        </td>
-        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
-          {lastName}
-        </td>
-        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
-          {dateOfBirth}
-        </td>
-        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
-          {contactType}
-        </td>
-        <td onClick={redirectToDetailsPage(contactInfo, contactKey)}>
-          {contact}
-        </td>
+        <td onClick={redirectToDetailsPage(contactInfo)}>{firstName}</td>
+        <td onClick={redirectToDetailsPage(contactInfo)}>{lastName}</td>
+        <td onClick={redirectToDetailsPage(contactInfo)}>{dateOfBirth}</td>
+        <td onClick={redirectToDetailsPage(contactInfo)}>{contactType}</td>
+        <td onClick={redirectToDetailsPage(contactInfo)}>{contact}</td>
         <td>
           <FontAwesomeIcon
-            onClick={ContactsAPI.deleteContact(contactKey)}
+            onClick={ContactsAPI.deleteContact(key)}
             icon={faTrashAlt}
           />
 
           {favorite ? (
             <FontAwesomeIcon
-              onClick={handleFavoriteContact(contactInfo, contactKey)}
+              onClick={handleFavoriteContact(contactInfo)}
               icon={faStar}
             />
           ) : (
             <FontAwesomeIcon
-              onClick={handleFavoriteContact(contactInfo, contactKey)}
+              onClick={handleFavoriteContact(contactInfo)}
               icon={farFaStar}
             />
           )}
