@@ -5,12 +5,12 @@ import { contactTypeOptions } from "../../constants";
 
 const ContactForm = ({ onSubmit, initialState }) => {
   return (
-    <Form onSubmit={onSubmit}  initialState={initialState}>
+    <Form onSubmit={onSubmit} initialState={initialState}>
       <div className="form_group">
-        <Form.Input label="First name" name="firstName" />
+        <Form.Input label="First name" name="firstName" maxLength="20" />
       </div>
       <div className="form_group">
-        <Form.Input label="Last name" name="lastName" />
+        <Form.Input label="Last name" name="lastName" maxLength="30" />
       </div>
       <div className="form_group">
         <Form.Input label="Date of birth" name="dateOfBirth" type="date" />

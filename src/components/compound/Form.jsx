@@ -28,7 +28,7 @@ const Form = ({ initialState, children, className, onSubmit }) => {
 export default Form;
 export { FormContext };
 
-const Input = ({ name, label, type }) => {
+const Input = ({ name, label, type, maxLength }) => {
   const { data, handleInputChange } = useFormContext();
   return (
     <>
@@ -36,6 +36,7 @@ const Input = ({ name, label, type }) => {
         {label}
       </label>
       <input
+        maxLength={maxLength}
         onChange={handleInputChange}
         name={name}
         type={type || null}
