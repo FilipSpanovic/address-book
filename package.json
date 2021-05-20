@@ -2,6 +2,9 @@
   "name": "react-address-book",
   "version": "0.1.0",
   "private": true,
+  "engines":{
+    "node": "14.x"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
