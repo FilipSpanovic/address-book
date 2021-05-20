@@ -42,7 +42,6 @@ export const authSlice = createSlice({
     },
   },
 });
-console.log(authSlice);
 export const selectUser = (state) => state.auth.user;
 export const selectStatus = (state) => state.auth.status;
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
