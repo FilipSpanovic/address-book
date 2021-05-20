@@ -50,7 +50,7 @@ const Login = ({ history }) => {
                 <Form.Input label="Email" name="email" />
               </div>
               <div className="form__group">
-                <Form.Input label="Password" name="password" />
+                <Form.Input label="Password" name="password" type="password" />
               </div>
               <div className="form__group u-center-text">
                 <Form.SubmitButton className="btn btn--green" text="Login" />
