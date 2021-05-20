@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farFaStar } from "@fortawesome/free-regular-svg-icons";
 import ColumnSortIcons from "../common/ColumnSortIcons";
+import { toast } from "react-toastify";
 
 const Table = ({
   contactsList,
@@ -57,6 +58,10 @@ const Table = ({
     });
   };
 
+  const showNotification = () => {
+    toast.info("Contact deleted");
+  };
+
   const constructTableCells = (contactInfo) => {
     const {
       firstName,
@@ -77,7 +82,7 @@ const Table = ({
         <td onClick={redirectToDetailsPage(contactInfo)}>{contact}</td>
         <td>
           <FontAwesomeIcon
-            onClick={ContactsAPI.deleteContact(key)}
+            onClick={ContactsAPI.deleteContact(key, showNotification)}
             icon={faTrashAlt}
           />
 

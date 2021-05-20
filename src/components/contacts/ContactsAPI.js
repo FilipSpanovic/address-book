@@ -19,12 +19,10 @@ export const ContactsAPI = {
         return;
       }
       const keys = Object.keys(snapshot.val());
-      console.log(keys);
       const values = Object.values(snapshot.val());
       const mapKeys = values.map((element, index) => {
         return { ...element, key: keys[index] };
       });
-
       cb(mapKeys);
     });
   },

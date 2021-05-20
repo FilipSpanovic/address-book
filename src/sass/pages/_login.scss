@@ -1,5 +1,5 @@
 .login-section {
-  min-height: calc(100vh - 40px);
+  min-height: 100vh;
   @include setBackground;
   @include flexCenter;
 }

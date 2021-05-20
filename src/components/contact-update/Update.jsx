@@ -10,8 +10,6 @@ import { validateContactForm } from "../../helpers/validateContactForm";
 const Update = ({ location, history }) => {
   let { id } = useParams();
 
-  console.log(location);
-
   if (location.state === undefined || id !== location.state.contactInfo.id) {
     return <p>page not found!</p>;
   }

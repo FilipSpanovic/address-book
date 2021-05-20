@@ -6,9 +6,11 @@ import Table from "./Table";
 
 const Details = ({ location, history }) => {
   let { id } = useParams();
-  console.log(location.state);
+
+  console.log(location, 'lokeišen')
 
   if (location.state === undefined || id !== location.state.contactInfo.id) {
+    console.log(console.log(id, 'ajdi'))
     return <p>page not found!</p>;
   }
 

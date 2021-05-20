@@ -28,12 +28,12 @@ const Contacts = ({ history }) => {
   const handleContactFormSubmit = (values, setData) => {
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
     if (!isFormValid) {
-      ContactsAPI.createContact(values, showNotificationAndRedirect);
+      ContactsAPI.createContact(values, showNotification);
       setData(CONTACT_FORM_INITIAL_STATE);
     }
   };
 
-  const showNotificationAndRedirect = () => {
+  const showNotification = () => {
     toast.success("Contact created");
   };
 

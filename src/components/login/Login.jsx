@@ -12,7 +12,7 @@ import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
 import {
   signInWithEmailAndPassword,
   selectStatus,
-} from "../../store/slices/loginSlice";
+} from "../../store/slices/authSlice";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
