@@ -34,6 +34,17 @@
     background-color: $color-secondary;
     color: $color-white;
   }
+
+  &--small {
+    display: block;
+    height: 2rem;
+    border-radius: 0.4rem;
+    transition: all 0.2 ease-out;
+    border: none;
+    cursor: pointer; 
+    margin-right: 2rem;
+
+  }
 }
 
 .action-btns {

@@ -8,7 +8,7 @@ import {
 import { validateContactForm } from "../../helpers/validateContactForm";
 import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
 
-import { useInfiniteScroll, useTableSort } from "../../hooks";
+import { useInfiniteScroll, useSort } from "../../hooks";
 
 import ContactForm from "../common/ContactForm";
 import Table from "./Table";
@@ -19,7 +19,7 @@ const Contacts = ({ history }) => {
   const [contactsList, setContactsList] = useState([]);
   const [searchTerms, setSearchTerms] = useState(SEARCH_TERMS_INITIAL_STATE);
   const { listLimit } = useInfiniteScroll();
-  const { sortData, handleSort } = useTableSort(contactsList);
+  const { sortInfo, handleSort } = useSort(contactsList);
 
   useEffect(() => {
     ContactsAPI.fetchContacts(setContactsList);
@@ -77,7 +77,7 @@ const Contacts = ({ history }) => {
               handleFavoriteContact={handleFavoriteContact}
               searchTerms={searchTerms}
               handleSort={handleSort}
-              sortData={sortData}
+              sortInfo={sortInfo}
             />
           </div>
         </div>

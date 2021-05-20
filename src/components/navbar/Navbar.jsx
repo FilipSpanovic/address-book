@@ -10,10 +10,13 @@ const Navbar = () => {
 
   return (
     <div className="nav">
-      <button className="nav__btn" onClick={redirect("/contacts")}>
+      <button className=" action-btns" onClick={redirect("/contacts")}>
         Contacts
       </button>
-      <button className="nav__btn" onClick={redirect("/contacts/favorites")}>
+      <button
+        className="action-btns "
+        onClick={redirect("/contacts/favorites")}
+      >
         Favorite contacts
       </button>
     </div>

@@ -1,12 +1,12 @@
 import React from "react";
 import { ContactsAPI } from "./ContactsAPI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import {
-  faStar as farFaStar,
-  faArrowAltCircleDown,
-  faArrowAltCircleUp,
-} from "@fortawesome/free-regular-svg-icons";
+  faArrowCircleDown,
+  faStar,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { faStar as farFaStar } from "@fortawesome/free-regular-svg-icons";
 
 const Table = ({
   contactsList,
@@ -15,11 +15,11 @@ const Table = ({
   handleFavoriteContact,
   searchTerms,
   handleSort,
-  sortData,
+  sortInfo,
 }) => {
-  const listCopy = { ...contactsList };
+  const contactListCopy = { ...contactsList };
 
-  const filteredContacts = Object.values(listCopy)
+  const filteredContacts = Object.values(contactListCopy)
     .filter(({ firstName, lastName, dateOfBirth, contactType, contact }) => {
       return (
         firstName
@@ -38,11 +38,11 @@ const Table = ({
       );
     })
     .sort((a, b) => {
-      if (a[sortData.key] < b[sortData.key]) {
-        return sortData.direction === "asc" ? -1 : 1;
+      if (a[sortInfo.key] < b[sortInfo.key]) {
+        return sortInfo.direction === "asc" ? -1 : 1;
       }
-      if (a[sortData.key] > b[sortData.key]) {
-        return sortData.direction === "asc" ? 1 : -1;
+      if (a[sortInfo.key] > b[sortInfo.key]) {
+        return sortInfo.direction === "asc" ? 1 : -1;
       }
       return 0;
     });
@@ -104,51 +104,83 @@ const Table = ({
     <table className="contact-table">
       <thead>
         <tr>
-          <th id="firstName" onClick={handleSort}>
+          <th
+            className="contact-table__sortable-header"
+            id="firstName"
+            onClick={handleSort}
+          >
             Firstname
-            {sortData.key === "firstName" && sortData.direction === "asc" && (
-              <FontAwesomeIcon icon={faArrowAltCircleDown} />
-            )}
-            {sortData.key === "firstName" && sortData.direction === "desc" && (
-              <FontAwesomeIcon icon={faArrowAltCircleUp} />
-            )}
+            {sortInfo.direction !== "default" &&
+              sortInfo.key === "firstName" && (
+                <FontAwesomeIcon
+                  className={`${
+                    sortInfo.direction === "desc" && "fa-rotate-180"
+                  }`}
+                  icon={faArrowCircleDown}
+                />
+              )}
           </th>
-          <th id="lastName" onClick={handleSort}>
+          <th
+            className="contact-table__sortable-header"
+            id="lastName"
+            onClick={handleSort}
+          >
             Lastname
-            {sortData.key === "lastName" && sortData.direction === "asc" && (
-              <FontAwesomeIcon icon={faArrowAltCircleDown} />
-            )}
-            {sortData.key === "lastName" && sortData.direction === "desc" && (
-              <FontAwesomeIcon icon={faArrowAltCircleUp} />
-            )}
+            {sortInfo.direction !== "default" &&
+              sortInfo.key === "lastName" && (
+                <FontAwesomeIcon
+                  className={`${
+                    sortInfo.direction === "desc" && "fa-rotate-180"
+                  }`}
+                  icon={faArrowCircleDown}
+                />
+              )}
           </th>
-          <th id="dateOfBirth" onClick={handleSort}>
+          <th
+            className="contact-table__sortable-header"
+            id="dateOfBirth"
+            onClick={handleSort}
+          >
             DOB
-            {sortData.key === "dateOfBirth" && sortData.direction === "asc" && (
-              <FontAwesomeIcon icon={faArrowAltCircleDown} />
-            )}
-            {sortData.key === "dateOfBirth" &&
-              sortData.direction === "desc" && (
-                <FontAwesomeIcon icon={faArrowAltCircleUp} />
+            {sortInfo.direction !== "default" &&
+              sortInfo.key === "dateOfBirth" && (
+                <FontAwesomeIcon
+                  className={`${
+                    sortInfo.direction === "desc" && "fa-rotate-180"
+                  }`}
+                  icon={faArrowCircleDown}
+                />
               )}
           </th>
-          <th id="contactType" onClick={handleSort}>
+          <th
+            className="contact-table__sortable-header"
+            id="contactType"
+            onClick={handleSort}
+          >
             Contact type
-            {sortData.key === "contactType" && sortData.direction === "asc" && (
-              <FontAwesomeIcon icon={faArrowAltCircleDown} />
-            )}
-            {sortData.key === "contactType" &&
-              sortData.direction === "desc" && (
-                <FontAwesomeIcon icon={faArrowAltCircleUp} />
+            {sortInfo.direction !== "default" &&
+              sortInfo.key === "contactType" && (
+                <FontAwesomeIcon
+                  className={`${
+                    sortInfo.direction === "desc" && "fa-rotate-180"
+                  }`}
+                  icon={faArrowCircleDown}
+                />
               )}
           </th>
-          <th id="contact" onClick={handleSort}>
+          <th
+            className="contact-table__sortable-header"
+            id="contact"
+            onClick={handleSort}
+          >
             Contact
-            {sortData.key === "contact" && sortData.direction === "asc" && (
-              <FontAwesomeIcon icon={faArrowAltCircleDown} />
-            )}
-            {sortData.key === "contact" && sortData.direction === "desc" && (
-              <FontAwesomeIcon icon={faArrowAltCircleUp} />
+            {sortInfo.direction !== "default" && sortInfo.key === "contact" && (
+              <FontAwesomeIcon
+                className={`${
+                  sortInfo.direction === "desc" && "fa-rotate-180"
+                }`}
+                icon={faArrowCircleDown}
+              />
             )}
           </th>
           <th>Actions</th>
