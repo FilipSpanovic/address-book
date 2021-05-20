@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 export const useInfiniteScroll = () => {
-  const [listLimit, setListLimit] = useState(10);
+  const [listLimit, setListLimit] = useState(20);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

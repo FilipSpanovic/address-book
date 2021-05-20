@@ -41,14 +41,8 @@
     border-radius: 0.4rem;
     transition: all 0.2 ease-out;
     border: none;
-    cursor: pointer; 
-    margin-right: 2rem;
-
+    cursor: pointer;
+    padding: 0 1rem;
+    margin-right: 1rem;
   }
-}
-
-.action-btns {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
 }

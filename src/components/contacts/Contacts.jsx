@@ -29,7 +29,7 @@ const Contacts = ({ history }) => {
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
     if (!isFormValid) {
       ContactsAPI.createContact(values, showNotificationAndRedirect);
-      setData(CONTACT_FORM_INITIAL_STATE);
+      // setData(CONTACT_FORM_INITIAL_STATE);
     }
   };
 

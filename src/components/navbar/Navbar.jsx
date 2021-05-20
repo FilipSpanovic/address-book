@@ -10,15 +10,17 @@ const Navbar = () => {
 
   return (
     <div className="nav">
-      <button className=" action-btns" onClick={redirect("/contacts")}>
+      <div className="action-btns">
+      <button className="btn--small btn--green" onClick={redirect("/contacts")}>
         Contacts
       </button>
       <button
-        className="action-btns "
+        className="btn--small btn--green"
         onClick={redirect("/contacts/favorites")}
       >
         Favorite contacts
       </button>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 .contacts-section {
-  min-height: 100vh;
-  overflow-y: scroll !important;
+  min-height: calc(100vh - 40px);
+  overflow: auto;
   padding: 2rem;
   background: linear-gradient(
     to right bottom,
