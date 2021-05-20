@@ -21,7 +21,7 @@ const Table = ({
         </tr>
         <tr>
           <td>Date of birth</td>
-          <th> {dateOfBirth}</th>
+          <th>{dateOfBirth}</th>
         </tr>
         <tr>
           <td>Contact type:</td>

@@ -7,14 +7,14 @@ import Table from "./Table";
 const Details = ({ location, history }) => {
   let { id } = useParams();
 
+  if (location.state === undefined || id !== location.state.contactInfo.id) {
+    return <p>page not found!</p>;
+  }
+
   const { state } = location;
   const { contactInfo, contactKey } = state;
   const { firstName, lastName, dateOfBirth, contactType, contact } =
     contactInfo;
-
-  if (state === undefined || id !== contactInfo.id) {
-    return <p>page not found!</p>;
-  }
 
   const redirectToContactUpdatePage = () => {
     history.push({

@@ -10,21 +10,25 @@ import { validateContactForm } from "../../helpers/validateContactForm";
 const Update = ({ location, history }) => {
   let { id } = useParams();
 
-  const { contactInfo, contactKey } = location.state;
-
-  if (location.state === undefined || id !== contactInfo.id) {
+  if (
+    location.state === undefined ||
+    location.contactInfo === undefined ||
+    id !== location.statecontactInfo.id
+  ) {
     return <p>page not found!</p>;
   }
 
-  const redirectToContactsPage = () => {
-    history.push("/contacts");
-  };
+  const { contactInfo, contactKey } = location.state;
 
   const redirectToDetailsPage = () => {
     history.push({
       pathname: `/contacts/${id}`,
       state: { contactInfo, contactKey },
     });
+  };
+
+  const redirectToContactsPage = () => {
+    history.push("/contacts");
   };
 
   const handleContactUpdate = (values) => {

@@ -13,33 +13,34 @@ const Favorites = () => {
   );
 
   const constructList = () => {
-    return Object.values(favoriteContactsList).map((contactInfo, index) => {
-      const {
+    return Object.values(favoriteContactsList).map(
+      ({
         firstName,
         lastName,
         dateOfBirth,
         contactType,
         contact,
         favorite,
-      } = contactInfo;
-
-      return (
-        <>
-          {favorite && (
-            <div
-              className="card card--wide"
-              style={{ borderBottom: "1px solid black" }}
-            >
-              <li>First name: {firstName} </li>
-              <li>Last: {lastName}</li>
-              <li>Date of birth: {dateOfBirth}</li>
-              <li>Contact type: {contactType}</li>
-              <li>Contact: {contact}</li>
-            </div>
-          )}
-        </>
-      );
-    });
+        id,
+      }) => {
+        return (
+          <div key={id}>
+            {favorite && (
+              <div
+                className="card card--wide"
+                style={{ borderBottom: "1px solid black" }}
+              >
+                <li>First name: {firstName} </li>
+                <li>Last: {lastName}</li>
+                <li>Date of birth: {dateOfBirth}</li>
+                <li>Contact type: {contactType}</li>
+                <li>Contact: {contact}</li>
+              </div>
+            )}
+          </div>
+        );
+      }
+    );
   };
 
   return (

@@ -25,10 +25,11 @@ const Contacts = ({ history }) => {
     ContactsAPI.fetchContacts(setContactsList);
   }, []);
 
-  const handleContactFormSubmit = (values) => {
+  const handleContactFormSubmit = (values, setData) => {
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
     if (!isFormValid) {
       ContactsAPI.createContact(values, showNotificationAndRedirect);
+      setData(CONTACT_FORM_INITIAL_STATE);
     }
   };
 
@@ -51,7 +52,6 @@ const Contacts = ({ history }) => {
 
   const handleSearch = (values) => setSearchTerms(values);
 
-  
   return (
     <div className="contacts-section">
       <div className="row">
