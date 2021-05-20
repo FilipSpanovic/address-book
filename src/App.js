@@ -1,4 +1,12 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from "react";
+
+import { useSelector } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import Login from "./components/login/Login";
 import Contacts from "./components/contacts/Contacts";
@@ -7,7 +15,11 @@ import Favorites from "./components/contact-favorites/Favorites";
 import Update from "./components/contact-update/Update";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 
+import { selectIsAuthenticated } from "./store/slices/authSlice";
+
 function App() {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
   return (
     <div className="App">
       <Router>
@@ -24,6 +36,16 @@ function App() {
             path="/contacts/update/:id"
             exact
             component={Update}
+          />
+          <Route
+            path=""
+            render={() => {
+              return isAuthenticated ? (
+                <Redirect to="/contacts" />
+              ) : (
+                <Redirect to="/login" />
+              );
+            }}
           />
         </Switch>
       </Router>
