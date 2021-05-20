@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 import Form from "../compound/Form";
 
@@ -58,6 +58,7 @@ const Login = ({ history }) => {
             </Form>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

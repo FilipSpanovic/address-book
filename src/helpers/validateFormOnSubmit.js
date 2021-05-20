@@ -6,7 +6,9 @@ export const validateFormOnSubmit = (values, validator) => {
   const contactFormKeys = Object.keys(contactFormErrors);
 
   if (contactFormKeys.length > 0) {
-    contactFormKeys.map((element) => toast.error(contactFormErrors[element]));
+    return contactFormKeys.map((element) =>
+      toast.error(contactFormErrors[element])
+    );
   }
 
   return contactFormKeys.length > 0;
