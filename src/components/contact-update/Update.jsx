@@ -3,18 +3,20 @@ import { useParams } from "react-router-dom";
 
 import ContactForm from "../common/ContactForm";
 import { ContactsAPI } from "../contacts/ContactsAPI";
-import { showNotificationAndRedirect } from "../../helpers/showNotificationAndRedirect";
-import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
-import { validateContactForm } from "../../helpers/validateContactForm";
+import { showNotificationAndRedirect } from "helpers/showNotificationAndRedirect";
+import { validateFormOnSubmit } from "helpers/validateFormOnSubmit";
+import { validateContactForm } from "helpers/validateContactForm";
 
 const Update = ({ location, history }) => {
   let { id } = useParams();
 
-  if (location.state === undefined || id !== location.state.contactInfo.id) {
+  const { state } = location;
+
+  if (state === undefined || id !== state.contactInfo.id) {
     return <p>page not found!</p>;
   }
 
-  const { contactInfo } = location.state;
+  const { contactInfo } = state;
 
   const redirectToDetailsPage = () => {
     history.push({
@@ -30,8 +32,10 @@ const Update = ({ location, history }) => {
   const handleContactUpdate = (values) => {
     const {
       contactInfo: { key },
-    } = location.state;
+    } = state;
+
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
+
     if (!isFormValid) {
       ContactsAPI.updateContact(
         key,

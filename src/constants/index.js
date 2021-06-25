@@ -38,3 +38,17 @@ export const contactTypeOptions = [
   { id: 3, name: "email", label: "Email" },
   { id: 4, name: "pager", label: "Pager" },
 ];
+
+export const sortDirections = {
+  ASC: "asc",
+  DESC: "desc",
+  DEFAULT: "default",
+};
+
+export const CONTACT_TABLE_HEADERS = [
+  { label: "First name", id: "firstName" },
+  { label: "Last name", id: "lastName" },
+  { label: "DOB", id: "dob" },
+  { label: "Contact type", id: "contactType" },
+  { label: "Contact", id: "contact" },
+];

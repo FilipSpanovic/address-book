@@ -1,20 +1,21 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { showNotificationAndRedirect } from "../../helpers/showNotificationAndRedirect";
-import { ContactsAPI } from "../contacts/ContactsAPI";
+import { showNotificationAndRedirect } from "helpers/showNotificationAndRedirect";
+import { ContactsAPI } from "components/contacts/ContactsAPI";
 import Table from "./Table";
 
 const Details = ({ location, history }) => {
   let { id } = useParams();
 
-  if (location.state === undefined || id !== location.state.contactInfo.id) {
+  const { state } = location;
+
+  if (state === undefined || id !== state.contactInfo.id) {
     return <p>page not found!</p>;
   }
-
-  const { state } = location;
+  
   const { contactInfo } = state;
-  const { firstName, lastName, dateOfBirth, contactType, contact, key } =
-    contactInfo;
+
+  const { firstName, lastName, dateOfBirth, contactType, contact, key } = contactInfo;
 
   const redirectToContactUpdatePage = () => {
     history.push({

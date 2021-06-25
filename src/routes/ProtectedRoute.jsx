@@ -1,14 +1,14 @@
 import React from "react";
+import { Fragment } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../hoc/Layout";
 import { logout, selectIsAuthenticated } from "../store/slices/authSlice";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const token = localStorage.getItem("X-token");
-
-  const dispatch = useDispatch();
 
   if (!token) {
     dispatch(logout());
@@ -18,18 +18,20 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
     localStorage.removeItem("X-token");
   }
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated && token ? (
-          <Layout>
-            <Component {...props} />
-          </Layout>
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
-    ></Route>
-  );
+  const renderLayout = (props) => {
+    if (isAuthenticated && token) {
+      return (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      );
+    }
+    return <Redirect to="/login" />;
+  };
+
+  const constructProtectedRoute = () => {
+    return <Route {...rest} render={renderLayout} />;
+  };
+
+  return <Fragment>{constructProtectedRoute()}</Fragment>;
 };

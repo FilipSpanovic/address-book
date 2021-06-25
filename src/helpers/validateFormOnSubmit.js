@@ -1,15 +1,18 @@
 import { toast } from "react-toastify";
 
-export const validateFormOnSubmit = (values, validator) => {
-  const contactFormErrors = validator(values);
-
-  const contactFormKeys = Object.keys(contactFormErrors);
-
-  if (contactFormKeys.length > 0) {
-    return contactFormKeys.map((element) =>
-      toast.error(contactFormErrors[element])
-    );
+const showNotificationIfErrorExists = (errors, keys) => {
+  if (keys.length > 0) {
+    return keys.map((element) => toast.error(errors[element]));
   }
-
-  return contactFormKeys.length > 0;
 };
+
+export const validateFormOnSubmit = (values, validator) => {
+  const errors = validator(values);
+
+  const keys = Object.keys(errors);
+
+  showNotificationIfErrorExists(errors, keys);
+
+  return keys.length > 0;
+};
+

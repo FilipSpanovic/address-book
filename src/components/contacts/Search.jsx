@@ -1,10 +1,10 @@
 import React from "react";
 
-import Form from "../compound/Form";
+import { Form } from "../compound/Form";
 
 import { contactTypeOptions } from "../../constants/index";
 
-const Search = ({ initialState, onSubmit }) => {
+export const Search = ({ initialState, onSubmit }) => {
   return (
     <div className="form">
       <Form onSubmit={onSubmit} initialState={initialState}>
@@ -59,5 +59,3 @@ const Search = ({ initialState, onSubmit }) => {
     </div>
   );
 };
-
-export default Search;

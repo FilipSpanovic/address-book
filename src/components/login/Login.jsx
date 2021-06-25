@@ -2,17 +2,16 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 
-import Form from "../compound/Form";
+import { LOGIN_FORM_INITIAL_STATE } from "constants/index";
 
-import { LOGIN_FORM_INITIAL_STATE } from "../../constants";
-
-import { validateLoginForm } from "../../helpers/validateLoginForm";
-import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
-
+import { validateLoginForm } from "helpers/validateLoginForm";
+import { validateFormOnSubmit } from "helpers/validateFormOnSubmit";
 import {
   signInWithEmailAndPassword,
   selectStatus,
-} from "../../store/slices/authSlice";
+} from "store/slices/authSlice";
+
+import  Form  from "../compound/Form/Form";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -46,20 +45,15 @@ const Login = ({ history }) => {
               onSubmit={handleSubmit}
               initialState={LOGIN_FORM_INITIAL_STATE}
             >
-              <div className="form__group">
-                <Form.Input label="Email" name="email" />
-              </div>
-              <div className="form__group">
-                <Form.Input
-                  label="Password"
-                  name="password"
-                  type="password"
-                  maxLength="8"
-                />
-              </div>
-              <div className="form__group u-center-text">
-                <Form.SubmitButton className="btn btn--green" text="Login" />
-              </div>
+              <Form.Input label="Email" name="email" />
+              <Form.Input
+                label="Password"
+                name="password"
+                type="password"
+                maxLength="8"
+                className="u-margin-bottom-small"
+              />
+              <Form.SubmitButton className="btn btn--green" text="Login" />
             </Form>
           </div>
         </div>

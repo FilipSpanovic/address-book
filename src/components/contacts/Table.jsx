@@ -5,8 +5,9 @@ import { faStar, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farFaStar } from "@fortawesome/free-regular-svg-icons";
 import ColumnSortIcons from "../common/ColumnSortIcons";
 import { toast } from "react-toastify";
+import { CONTACT_TABLE_HEADERS } from "constants/index";
 
-const Table = ({
+export const Table = ({
   contactsList,
   listLimit,
   redirectToDetailsPage,
@@ -15,21 +16,7 @@ const Table = ({
   handleSort,
   sortInfo,
 }) => {
-  const contactListCopy = { ...contactsList };
-
-  const sortContacts = () => {
-    return Object.values(contactListCopy).sort((a, b) => {
-      if (a[sortInfo.key] < b[sortInfo.key]) {
-        return sortInfo.direction === "asc" ? -1 : 1;
-      }
-      if (a[sortInfo.key] > b[sortInfo.key]) {
-        return sortInfo.direction === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
-  };
-
-  const filterContacts = sortContacts().filter(
+  const filterContacts = contactsList.filter(
     ({ firstName, lastName, dateOfBirth, contactType, contact }) => {
       return (
         firstName
@@ -48,15 +35,6 @@ const Table = ({
       );
     }
   );
-
-  const constructTableBody = () => {
-    return filterContacts.map((contact, index) => {
-      const { id } = contact;
-      if (index < listLimit) {
-        return <tr key={id}>{constructTableCells(contact)}</tr>;
-      }
-    });
-  };
 
   const showNotification = () => {
     toast.info("Contact deleted");
@@ -80,72 +58,53 @@ const Table = ({
         <td onClick={redirectToDetailsPage(contactInfo)}>{dateOfBirth}</td>
         <td onClick={redirectToDetailsPage(contactInfo)}>{contactType}</td>
         <td onClick={redirectToDetailsPage(contactInfo)}>{contact}</td>
+
         <td>
           <FontAwesomeIcon
             onClick={ContactsAPI.deleteContact(key, showNotification)}
             icon={faTrashAlt}
           />
 
-          {favorite ? (
-            <FontAwesomeIcon
-              onClick={handleFavoriteContact(contactInfo)}
-              icon={faStar}
-            />
-          ) : (
-            <FontAwesomeIcon
-              onClick={handleFavoriteContact(contactInfo)}
-              icon={farFaStar}
-            />
-          )}
+          <FontAwesomeIcon
+            onClick={handleFavoriteContact(contactInfo)}
+            icon={(favorite && faStar) || farFaStar}
+          />
         </td>
       </>
     );
+  };
+
+  const constructTableBody = () => {
+    return filterContacts.map((contact, index) => {
+      const { id } = contact;
+      if (index < listLimit) {
+        return <tr key={id}>{constructTableCells(contact)}</tr>;
+      }
+      return <tr key={id}></tr>;
+    });
+  };
+
+  const constructTableHeaders = () => {
+    return CONTACT_TABLE_HEADERS.map(({ id, label }) => {
+      return (
+        <th
+          className="contact-table__sortable-header"
+          id={id}
+          onClick={handleSort}
+          key={id}
+        >
+          {label}
+          <ColumnSortIcons columnKey={id} sortInfo={sortInfo} />
+        </th>
+      );
+    });
   };
 
   return (
     <table className="contact-table">
       <thead>
         <tr>
-          <th
-            className="contact-table__sortable-header"
-            id="firstName"
-            onClick={handleSort}
-          >
-            Firstname
-            <ColumnSortIcons columnKey="firstName" sortInfo={sortInfo} />
-          </th>
-          <th
-            className="contact-table__sortable-header"
-            id="lastName"
-            onClick={handleSort}
-          >
-            Lastname
-            <ColumnSortIcons columnKey="lastName" sortInfo={sortInfo} />
-          </th>
-          <th
-            className="contact-table__sortable-header"
-            id="dateOfBirth"
-            onClick={handleSort}
-          >
-            DOB
-            <ColumnSortIcons columnKey="dateOfBirth" sortInfo={sortInfo} />
-          </th>
-          <th
-            className="contact-table__sortable-header"
-            id="contactType"
-            onClick={handleSort}
-          >
-            Contact type
-            <ColumnSortIcons columnKey="contactType" sortInfo={sortInfo} />
-          </th>
-          <th
-            className="contact-table__sortable-header"
-            id="contact"
-            onClick={handleSort}
-          >
-            Contact
-            <ColumnSortIcons columnKey="contact" sortInfo={sortInfo} />
-          </th>
+          {constructTableHeaders()}
           <th>Actions</th>
         </tr>
       </thead>
@@ -153,5 +112,3 @@ const Table = ({
     </table>
   );
 };
-
-export default Table;

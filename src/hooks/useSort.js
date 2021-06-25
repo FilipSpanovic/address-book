@@ -1,24 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { sortDirections } from "../constants";
 
 export const useSort = (list) => {
+  const { ASC, DESC, DEFAULT } = sortDirections;
+
   const [sortInfo, setSortInfo] = useState({
     key: "firstName",
-    direction: "default",
+    direction: DEFAULT,
   });
 
   const handleSort = ({ target: { id } }) => {
-    if (id === sortInfo.key) {
-      if (sortInfo.direction === "asc") {
-        setSortInfo({ key: id, direction: "desc" });
-        return;
-      }
-      if (sortInfo.direction === "desc") {
-        setSortInfo({ key: id, direction: "default" });
-        return;
-      }
+    const sortObj = {
+      key: id,
+      direction: ASC,
+    };
+
+    const { key, direction } = sortInfo;
+
+    const assignDirection = (dir) => {
+      sortObj.direction = dir;
+    };
+
+    if (id === key) {
+      direction === ASC
+        ? assignDirection(DESC)
+        : direction === DESC && assignDirection(DEFAULT);
     }
-    return setSortInfo({ key: id, direction: "asc" });
+    setSortInfo(sortObj);
   };
 
-  return { sortInfo, handleSort };
+  const sortedList = useMemo(() => {
+    return Object.values(list).sort((a, b) => {
+      if (sortInfo.direction !== DEFAULT) {
+        if (a[sortInfo.key] < b[sortInfo.key]) {
+          return sortInfo.direction === ASC ? -1 : 1;
+        }
+        return sortInfo.direction === ASC ? 1 : -1;
+      }
+      return 0;
+    });
+  }, [list, sortInfo]);
+
+  return { sortInfo, handleSort, sortedList };
 };

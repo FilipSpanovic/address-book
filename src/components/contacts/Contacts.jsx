@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
 import {
   CONTACT_FORM_INITIAL_STATE,
   SEARCH_INITIAL_STATE,
   SEARCH_TERMS_INITIAL_STATE,
-} from "../../constants";
-import { validateContactForm } from "../../helpers/validateContactForm";
-import { validateFormOnSubmit } from "../../helpers/validateFormOnSubmit";
+} from "constants/index";
 
-import { useInfiniteScroll, useSort } from "../../hooks";
+import { validateContactForm } from "helpers/validateContactForm";
+import { validateFormOnSubmit } from "helpers/validateFormOnSubmit";
+
+import { useInfiniteScroll, useSort } from "hooks";
 
 import ContactForm from "../common/ContactForm";
-import Table from "./Table";
-import Search from "./Search";
-import { ContactsAPI } from "./ContactsAPI";
+
+import { Table, Search, ContactsAPI } from "./";
 
 const Contacts = ({ history }) => {
   const [contactsList, setContactsList] = useState([]);
   const [searchTerms, setSearchTerms] = useState(SEARCH_TERMS_INITIAL_STATE);
   const { listLimit } = useInfiniteScroll();
-  const { sortInfo, handleSort } = useSort(contactsList);
+  const { sortInfo, handleSort, sortedList } = useSort(contactsList);
 
   useEffect(() => {
     ContactsAPI.fetchContacts(setContactsList);
@@ -27,6 +28,7 @@ const Contacts = ({ history }) => {
 
   const handleContactFormSubmit = (values, setData) => {
     const isFormValid = validateFormOnSubmit(values, validateContactForm);
+
     if (!isFormValid) {
       ContactsAPI.createContact(values, showNotification);
       setData(CONTACT_FORM_INITIAL_STATE);
@@ -71,7 +73,7 @@ const Contacts = ({ history }) => {
               initialState={SEARCH_INITIAL_STATE}
             />
             <Table
-              contactsList={contactsList}
+              contactsList={sortedList}
               listLimit={listLimit}
               redirectToDetailsPage={redirectToDetailsPage}
               handleFavoriteContact={handleFavoriteContact}
