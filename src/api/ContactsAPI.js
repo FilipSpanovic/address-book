@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { db } from "../../firebase";
+import { db } from "../firebase";
 
 const contactPath = "/contacts";
 
@@ -28,7 +28,7 @@ export const ContactsAPI = {
   },
 
   deleteContact: function (key, cb) {
-    return async function preventDefault(e) {
+    return async function (e) {
       e.preventDefault();
       await db.ref(contactPath).child(key).remove();
       if (typeof cb === "function") {

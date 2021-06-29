@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-import { Input, Select, SubmitButton } from "./";
+import { Input, Select, SubmitButton } from "./Fields";
 
 const FormContext = React.createContext();
 

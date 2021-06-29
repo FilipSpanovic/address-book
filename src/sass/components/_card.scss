@@ -6,5 +6,8 @@
   &--wide {
     min-width: 40rem;
   }
-  
+
+  &--bordered {
+    border: 1px solid $color-black;
+  }
 }

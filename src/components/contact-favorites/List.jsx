@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { ContactsAPI } from "../contacts/ContactsAPI";
-
-const Favorites = () => {
-  const [favoriteContactsList, setFavoriteContactsList] = useState([]);
-
-  useEffect(() => {
-    ContactsAPI.fetchContacts(setFavoriteContactsList);
-  }, []);
-
+import React from "react";
+import { Card } from "../UI";
+export const List = ({ favoriteContactsList }) => {
   const filterFavoriteContacts = favoriteContactsList.filter(
     (element) => element.favorite
   );
@@ -26,16 +19,13 @@ const Favorites = () => {
         return (
           <div key={id}>
             {favorite && (
-              <div
-                className="card card--wide"
-                style={{ borderBottom: "1px solid black" }}
-              >
+              <Card className=" card--wide card--bordered">
                 <li>First name: {firstName} </li>
                 <li>Last: {lastName}</li>
                 <li>Date of birth: {dateOfBirth}</li>
                 <li>Contact type: {contactType}</li>
                 <li>Contact: {contact}</li>
-              </div>
+              </Card>
             )}
           </div>
         );
@@ -44,17 +34,14 @@ const Favorites = () => {
   };
 
   return (
-    <div className="favorites-section">
+    <div>
       <ul>
         {filterFavoriteContacts.length > 0 ? (
           constructList()
         ) : (
           <p>no favorite contacts</p>
         )}
-        <li></li>
       </ul>
     </div>
   );
 };
-
-export default Favorites;

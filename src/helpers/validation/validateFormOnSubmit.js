@@ -6,13 +6,17 @@ const showNotificationIfErrorExists = (errors, keys) => {
   }
 };
 
-export const validateFormOnSubmit = (values, validator) => {
-  const errors = validator(values);
-
+export const validateFormOnSubmit = (
+  values,
+  formValidationFunction,
+  submitApi
+) => {
+  const errors = formValidationFunction(values);
   const keys = Object.keys(errors);
 
   showNotificationIfErrorExists(errors, keys);
-
-  return keys.length > 0;
+  
+  if (keys.length < 1) {
+    submitApi();
+  }
 };
-

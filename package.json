@@ -2,7 +2,7 @@
   "name": "react-address-book",
   "version": "0.1.0",
   "private": true,
-  "engines":{
+  "engines": {
     "node": "14.x"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^12.1.10",
     "firebase": "^8.6.1",
     "node-sass": "^4.14.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",

@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Button } from "components/UI";
 import { logout } from "store/slices/authSlice";
 
 const Navbar = () => {
@@ -14,27 +15,27 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    localStorage.removeItem("X-token")
+    localStorage.removeItem("X-token");
   };
 
   return (
     <div className="nav">
       <div className="action-btns">
-        <button
+        <Button
           className="btn--small btn--green"
+          text="Contacts"
           onClick={redirect("/contacts")}
-        >
-          Contacts
-        </button>
-        <button
+        />
+        <Button
           className="btn--small btn--green"
+          text="Favorite contacts"
           onClick={redirect("/contacts/favorites")}
-        >
-          Favorite contacts
-        </button>
-        <button className="btn--small btn--red" onClick={handleLogout}>
-          Logout
-        </button>
+        />
+        <Button
+          className="btn--small btn--red"
+          text="Logout"
+          onClick={handleLogout}
+        />
       </div>
     </div>
   );

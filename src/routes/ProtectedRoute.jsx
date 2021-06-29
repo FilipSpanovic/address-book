@@ -2,7 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Layout from "../hoc/Layout";
+import { Layout } from "../hoc";
 import { logout, selectIsAuthenticated } from "../store/slices/authSlice";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
@@ -18,7 +18,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
     localStorage.removeItem("X-token");
   }
 
-  const renderLayout = (props) => {
+  const renderLayoutIfAuthenticated = (props) => {
     if (isAuthenticated && token) {
       return (
         <Layout>
@@ -30,7 +30,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
   };
 
   const constructProtectedRoute = () => {
-    return <Route {...rest} render={renderLayout} />;
+    return <Route {...rest} render={renderLayoutIfAuthenticated} />;
   };
 
   return <Fragment>{constructProtectedRoute()}</Fragment>;

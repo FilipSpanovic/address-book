@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { sortDirections } from "../constants";
 
 export const useSort = (list) => {
@@ -39,7 +39,7 @@ export const useSort = (list) => {
       }
       return 0;
     });
-  }, [list, sortInfo]);
+  }, [list, sortInfo, ASC, DEFAULT]);
 
   return { sortInfo, handleSort, sortedList };
 };

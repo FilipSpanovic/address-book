@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { contactTypeOptions } from "constants/index";
 
-import { Form } from "../compound/Form";
+import { Form } from "../compound";
 
 const ContactForm = ({ onSubmit, initialState }) => {
   return (
@@ -23,6 +24,11 @@ const ContactForm = ({ onSubmit, initialState }) => {
       <Form.SubmitButton className="btn btn--green" text="Submit" />
     </Form>
   );
+};
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  initialState: PropTypes.object.isRequired,
 };
 
 export default ContactForm;

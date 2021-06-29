@@ -1,4 +1,2 @@
-export { ContactsAPI } from "./ContactsAPI";
-export { Search } from "./Search";
-export { Table } from "./Table";
-export { default as Contacts } from "./Contacts";
+export { Search } from "./Search/Search";
+export { Table } from "./Table/Table";

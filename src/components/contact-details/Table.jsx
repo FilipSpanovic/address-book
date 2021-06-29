@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Table = ({
   firstName,
@@ -6,8 +7,8 @@ const Table = ({
   dateOfBirth,
   contactType,
   contact,
-  favorite,
 }) => {
+  
   return (
     <table className="contact-table-details">
       <tbody>
@@ -31,10 +32,17 @@ const Table = ({
           <td>Contact:</td>
           <th>{contact}</th>
         </tr>
-        {favorite && <p>favorit</p>}
       </tbody>
     </table>
   );
 };
 
 export default Table;
+
+Table.propTypes = {
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  dateOfBirth: PropTypes.string.isRequired,
+  contactType: PropTypes.string.isRequired,
+  contact: PropTypes.string.isRequired,
+};

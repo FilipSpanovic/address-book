@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useInfiniteScroll = () => {
   const [listLimit, setListLimit] = useState(20);
@@ -13,8 +13,10 @@ export const useInfiniteScroll = () => {
   const handleScroll = ({ target: { scrollingElement } }) => {
     const { scrollHeight, scrollTop, clientHeight } = scrollingElement;
     const bottom = scrollHeight - scrollTop === clientHeight;
+    const nextListElements = 10;
+
     if (bottom) {
-      setListLimit((prevState) => prevState + 10);
+      setListLimit((prevState) => prevState + nextListElements);
     }
   };
   return {

@@ -1,4 +1,5 @@
-import { validatePassword, validateEmail } from "./";
+import { validatePassword } from "./validatePassword"
+import { validateEmail } from "./validateEmail"
 
 export const validateLoginForm = ({ email, password }) => {
   let errors = {};

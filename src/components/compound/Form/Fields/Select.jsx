@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
+
 import { useFormContext } from "hooks";
 
 export const Select = ({ name, label, options }) => {
-  
   const constructOptions = () =>
     options.map(({ name, id, label }) => (
       <option value={name} name={name} key={id}>
@@ -25,4 +26,10 @@ export const Select = ({ name, label, options }) => {
       </select>
     </>
   );
+};
+
+Select.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
 };
