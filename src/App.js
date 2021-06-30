@@ -7,14 +7,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-
-import Login from "./pages/login/Login";
-import Contacts from "./pages/contacts/Contacts";
-import Details from "./pages/contact-details/Details";
-import Favorites from "./pages/contact-favorites/Favorites";
-import Update from "./pages/contact-update/Update";
+import { Login, Contacts, Details, Favorites, Update } from "pages";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
-
 import { selectIsAuthenticated } from "./store/slices/authSlice";
 
 function App() {

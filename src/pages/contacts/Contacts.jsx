@@ -5,14 +5,12 @@ import {
   SEARCH_INITIAL_STATE,
   SEARCH_TERMS_INITIAL_STATE,
 } from "constants/index";
-import ContactForm from "components/common/ContactForm";
-import { Table, Search } from "components/contacts";
-import { Row, Col, Card } from "components/UI";
+import { ContactForm, ContactsTable, Search, Row, Col, Card } from "components";
 import { ContactsAPI } from "api/ContactsAPI";
 import { validateContactForm, validateFormOnSubmit } from "helpers";
 import { useInfiniteScroll, useSort } from "hooks";
 
-const Contacts = () => {
+ export const Contacts = () => {
   const [contactsList, setContactsList] = useState([]);
   const [searchTerms, setSearchTerms] = useState(SEARCH_TERMS_INITIAL_STATE);
   const { listLimit } = useInfiniteScroll();
@@ -67,7 +65,7 @@ const Contacts = () => {
               onSubmit={handleSearch}
               initialState={SEARCH_INITIAL_STATE}
             />
-            <Table
+            <ContactsTable
               contactsList={sortedList}
               listLimit={listLimit}
               handleFavoriteContact={handleFavoriteContact}
@@ -83,4 +81,3 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;

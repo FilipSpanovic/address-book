@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import { Form } from "../../compound";
-import { Row, Col } from "components/UI";
+import { Form, Row, Col } from "components";
 import { contactTypeOptions } from "constants/index";
 
 export const Search = ({ initialState, onSubmit }) => {
@@ -19,7 +17,6 @@ export const Search = ({ initialState, onSubmit }) => {
           <Form.Input type="date" name="dateOfBirth" label="Date of birth" />
         </Col>
       </Row>
-
       <Row>
         <Col>
           <Form.Select
@@ -44,5 +41,5 @@ export const Search = ({ initialState, onSubmit }) => {
 
 Search.propTypes = {
   initialState: PropTypes.object.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
 };

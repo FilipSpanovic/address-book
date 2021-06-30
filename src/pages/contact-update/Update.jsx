@@ -1,8 +1,6 @@
 import React from "react";
-
 import { ContactsAPI } from "api/ContactsAPI";
-import ContactForm from "components/common/ContactForm";
-import { Card, Button } from "components/UI";
+import { ContactForm, Card, Button } from "components";
 import {
   showNotificationAndRedirect,
   validateFormOnSubmit,
@@ -48,4 +46,4 @@ const Update = ({
   );
 };
 
-export default withDynamicRoute(Update);
+export const UpdateWithDynamicRoute = withDynamicRoute(Update);

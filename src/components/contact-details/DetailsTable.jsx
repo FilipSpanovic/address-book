@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Table = ({
+export const DetailsTable = ({
   firstName,
   lastName,
   dateOfBirth,
   contactType,
   contact,
 }) => {
-  
   return (
     <table className="contact-table-details">
       <tbody>
@@ -37,9 +36,7 @@ const Table = ({
   );
 };
 
-export default Table;
-
-Table.propTypes = {
+DetailsTable.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   dateOfBirth: PropTypes.string.isRequired,

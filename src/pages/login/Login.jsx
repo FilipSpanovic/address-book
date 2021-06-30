@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
-import { Form } from "components/compound";
-import { Card } from "components/UI";
+import { Form, Card } from "components";
 import { LOGIN_FORM_INITIAL_STATE } from "constants/index";
 import { validateLoginForm, validateFormOnSubmit } from "helpers";
-import { signInWithEmailAndPassword, selectStatus } from "store/slices/authSlice";
+import {
+  signInWithEmailAndPassword,
+  selectStatus,
+} from "store/slices/authSlice";
 
-const Login = ({ history }) => {
+export const Login = ({ history }) => {
   const dispatch = useDispatch();
   const status = useSelector(selectStatus);
   const initMount = useRef(true);
@@ -15,12 +17,13 @@ const Login = ({ history }) => {
   useEffect(() => {
     if (!initMount.current) {
       status === "fulfilled" && history.push("/contacts");
-
-      status === "rejected" && toast.error("The email address or password is incorrect. Please try again");
-
+      status === "rejected" &&
+        toast.error(
+          "The email address or password is incorrect. Please try again"
+        );
       return;
     }
-    
+
     initMount.current = false;
   }, [status, history]);
 
@@ -34,25 +37,21 @@ const Login = ({ history }) => {
   };
 
   return (
-    <>
-      <div className="login-section">
-        <Card>
-          <Form onSubmit={handleSubmit} initialState={LOGIN_FORM_INITIAL_STATE}>
-            <Form.Input label="Email" name="email" />
-            <Form.Input
-              label="Password"
-              name="password"
-              type="password"
-              maxLength="8"
-              className="u-margin-bottom-small"
-            />
-            <Form.SubmitButton className="btn btn--green" text="Login" />
-          </Form>
-        </Card>
-        <ToastContainer />
-      </div>
-    </>
+    <div className="login-section">
+      <Card>
+        <Form onSubmit={handleSubmit} initialState={LOGIN_FORM_INITIAL_STATE}>
+          <Form.Input label="Email" name="email" />
+          <Form.Input
+            label="Password"
+            name="password"
+            type="password"
+            maxLength="8"
+            className="u-margin-bottom-small"
+          />
+          <Form.SubmitButton className="btn btn--green" text="Login" />
+        </Form>
+      </Card>
+      <ToastContainer />
+    </div>
   );
 };
-
-export default Login;

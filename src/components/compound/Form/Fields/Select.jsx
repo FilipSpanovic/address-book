@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-
 import { useFormContext } from "hooks";
 
 export const Select = ({ name, label, options }) => {

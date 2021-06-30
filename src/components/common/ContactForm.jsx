@@ -5,7 +5,7 @@ import { contactTypeOptions } from "constants/index";
 
 import { Form } from "../compound";
 
-const ContactForm = ({ onSubmit, initialState }) => {
+export const ContactForm = ({ onSubmit, initialState }) => {
   return (
     <Form onSubmit={onSubmit} initialState={initialState}>
       <Form.Input label="First name" name="firstName" maxLength="20" />
@@ -31,4 +31,3 @@ ContactForm.propTypes = {
   initialState: PropTypes.object.isRequired,
 };
 
-export default ContactForm;

@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Button } from "components/UI";
+import { Button } from "components";
 import { logout } from "store/slices/authSlice";
 
-const Navbar = () => {
+export const Navbar = () => {
   const dispatch = useDispatch();
 
   let history = useHistory();
@@ -41,4 +41,3 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;

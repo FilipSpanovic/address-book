@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
+import { Button } from "components";
 import { useFormContext } from "hooks";
-import { Button } from "components/UI";
 
 export const SubmitButton = ({ text, className }) => {
   const { handleSubmit } = useFormContext();

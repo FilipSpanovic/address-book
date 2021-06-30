@@ -1,5 +1,5 @@
-import { useFormContext } from "hooks";
 import PropTypes from "prop-types";
+import { useFormContext } from "hooks";
 
 export const Input = ({ name, label, type, maxLength, className }) => {
   const { data, handleInputChange } = useFormContext();

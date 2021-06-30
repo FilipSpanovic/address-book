@@ -1,5 +1,6 @@
 import React from "react";
-import { Card } from "../UI";
+import { Card } from "components";
+
 export const List = ({ favoriteContactsList }) => {
   const filterFavoriteContacts = favoriteContactsList.filter(
     (element) => element.favorite

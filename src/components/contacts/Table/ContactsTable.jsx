@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Body, Header } from ".";
 
-export const Table = ({
+export const ContactsTable = ({
   contactsList,
   listLimit,
   handleFavoriteContact,
@@ -45,7 +45,7 @@ export const Table = ({
   );
 };
 
-Table.propTypes = {
+ContactsTable.propTypes = {
   contactsList: PropTypes.array.isRequired,
   listLimit: PropTypes.number.isRequired,
   handleFavoriteContact: PropTypes.func.isRequired,

@@ -1,11 +1,10 @@
 import React from "react";
 import { ContactsAPI } from "api/ContactsAPI";
-import Table from "components/contact-details/Table";
-import { Card, Button } from "components/UI";
+import { DetailsTable, Card, Button } from "components";
 import { showNotificationAndRedirect } from "helpers";
 import { withDynamicRoute } from "hoc/withDynamicRoute/withDynamicRoute";
 
-const Details = ({
+ const Details = ({
   redirectToContactsPage,
   redirectToContactUpdatePage,
   location,
@@ -30,7 +29,7 @@ const Details = ({
             )}
           />
         </div>
-        <Table
+        <DetailsTable
           firstName={firstName}
           lastName={lastName}
           dateOfBirth={dateOfBirth}
@@ -43,4 +42,4 @@ const Details = ({
   );
 };
 
-export default withDynamicRoute(Details);
+export const DetailsWithDynamicRoute = withDynamicRoute(Details)
